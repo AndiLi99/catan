@@ -1,10 +1,9 @@
 #ifndef HEXAGON
 #define HEXAGON
 
-class Hexagon {
-
-	public:
-
+struct Hexagon {
+	int a;
+	int b;
 };
 
 #endif
