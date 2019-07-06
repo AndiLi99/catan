@@ -6,9 +6,9 @@
 
 template<class T1, class T2, class T3>
 class HexagonGrid{
-        std::unordered_map<Hexagon, T1> hexagons;
-        std::unordered_map<Edge, T2> edges;
-        std::unordered_map<Vertex, T3> vertices;
+        std::unordered_map<Hexagon, T1, HexagonHash, HexagonEquals> hexagons;
+        std::unordered_map<Edge, T2, EdgeHash, EdgeEquals> edges;
+        std::unordered_map<Vertex, T3, VertexHash, VertexEquals> vertices;
     public:
         HexagonGrid(size_t radius);
         std::vector<Hexagon> neighbours(const& Hexagon);
