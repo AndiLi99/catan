@@ -1,21 +1,33 @@
 #ifndef HEXAGON
 #define HEXAGON
-#include "edge.h"
-#include "vertex.h"
+#include <vector>
+#include "corner.h"
+#include "side.h"
+class Edge;
+class Vertex;
 
-struct Hexagon {
-	int a;
-	int b;
-	Hexagon(int a, int b): a{a}, b{b}{}
-  bool operator==(const Hexagon);
-  bool operator!=(const Hexagon);
-  Hexagon operator+(const Hexagon);
-  Hexagon operator-(const Hexagon);
-  Hexagon operator*(const Hexagon);
-  int length();
-  std::vector<Hexagon> neighbours();
-  std::vector<Edge> borders();
-  std::vector<Vertex> corners();
+class Hexagon {
+  private:
+    static const Hexagon HEX_DIRECTION[6];
+  public:
+    int a;
+    int b;
+    int c;
+    Hexagon(int a, int b);
+    bool operator==(const Hexagon& other);
+    bool operator!=(const Hexagon& other);
+    Hexagon operator+(const Hexagon& other);
+    Hexagon operator-(const Hexagon& other);
+    Hexagon operator*(int factor);
+    friend Hexagon operator*(const int factor, const Hexagon& other);
+    int length();
+    std::vector<Hexagon> neighbours();
+    std::vector<Edge> borders();
+    std::vector<Vertex> corners();
+    static Hexagon hex_direction(int direction);
+    Hexagon neighbour(int direction);
+    Edge border(Side side);
+    Vertex corner(Corner corner);
 };
 
 //https://stackoverflow.com/questions/16792751/hashmap-for-2d3d-coordinates-i-e-vector-of-doubles

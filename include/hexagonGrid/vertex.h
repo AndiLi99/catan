@@ -1,17 +1,23 @@
 #ifndef VERTEX
 #define VERTEX
-#include "hexagon.h"
-#include "edge.h"
-enum class Corner{L, R};
 
-struct Vertex{
-	int a;
-	int b;
-	Corner c;
-	Vertex(int a, int b, Corner c): a{a}, b{b}, c{c} {}
-  std::vector<Hexagon> touches();
-  std::vector<Edge> protrudes();
-  std::vector<Vertex> adjacent();
+#include <vector>
+#include "corner.h"
+
+class Hexagon;
+class Edge;
+
+class Vertex{
+  public:
+    int a;
+    int b;
+    Corner c;
+    Vertex(int a, int b, Corner c): a{a}, b{b}, c{c} {}
+    bool operator==(const Vertex);
+    bool operator!=(const Vertex);
+    std::vector<Hexagon> touches();
+    std::vector<Edge> protrudes();
+    std::vector<Vertex> adjacent();
 };
 
 //https://stackoverflow.com/questions/16792751/hashmap-for-2d3d-coordinates-i-e-vector-of-doubles

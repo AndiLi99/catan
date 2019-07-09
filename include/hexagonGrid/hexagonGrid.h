@@ -1,3 +1,6 @@
+#ifndef HEXAGON_GRID
+#define HEXAGON_GRID
+
 #include "hexagon.h"
 #include "edge.h"
 #include "vertex.h"
@@ -89,3 +92,4 @@ std::vector<Vertex> HexagonGrid<T1, T2, T3>::adjacent(Vertex vertex){
     std::remove_if(ret.begin, ret.end(), [](Vertex v){return vertices.find(v) == vertices.end()})
     return ret;
 }
+#endif
