@@ -90,6 +90,9 @@ void test_all(){
     test_hex_math();
     test_hex_neighbour();
     test_hex_length();
+    for (Hexagon h: Hexagon(0,0).neighbours()){
+        std::cout << h;
+    }
 }
 
 int main(){
