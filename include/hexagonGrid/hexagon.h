@@ -1,6 +1,7 @@
 #ifndef HEXAGON
 #define HEXAGON
 #include <vector>
+#include <iostream>
 #include "corner.h"
 #include "side.h"
 class Edge;
@@ -19,6 +20,7 @@ class Hexagon {
     Hexagon operator+(const Hexagon& other);
     Hexagon operator-(const Hexagon& other);
     Hexagon operator*(int factor);
+    friend std::ostream& operator<<(std::ostream& out, const Hexagon& hex);
     friend Hexagon operator*(const int factor, const Hexagon& other);
     int length();
     std::vector<Hexagon> neighbours();
