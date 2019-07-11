@@ -2,6 +2,7 @@
 #define EDGE
 
 #include <vector>
+#include <iostream>
 #include "side.h"
 #include "corner.h"
 
@@ -13,9 +14,10 @@ class Edge {
     int a;
     int b;
     Side s;
-    Edge(int a, int b, Side s): a{a}, b{b}, s{s} {}
-    bool operator==(const Edge);
-    bool operator!=(const Edge);
+    Edge(int a, int b, Side s);
+    bool operator==(const Edge&);
+    bool operator!=(const Edge&);
+    friend std::ostream& operator<<(std::ostream& out, const Edge& edge);
     std::vector<Hexagon> joins();
     std::vector<Edge> continues();
     std::vector<Vertex> endpoints();

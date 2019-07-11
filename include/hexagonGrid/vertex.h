@@ -12,9 +12,10 @@ class Vertex{
     int a;
     int b;
     Corner c;
-    Vertex(int a, int b, Corner c): a{a}, b{b}, c{c} {}
-    bool operator==(const Vertex);
-    bool operator!=(const Vertex);
+    Vertex(int a, int b, Corner c);
+    bool operator==(const Vertex&);
+    bool operator!=(const Vertex&);
+    friend std::ostream& operator<<(std::ostream& out, const Vertex& vertex);
     std::vector<Hexagon> touches();
     std::vector<Edge> protrudes();
     std::vector<Vertex> adjacent();

@@ -27,6 +27,9 @@ Vertex Hexagon::corner(Corner c){
     return Vertex{a, b, c};
 }
 
+/*
+    @returns: This function returns a vector of Hexagon which are neighbours of this Hexagon    
+ */
 std::vector<Hexagon> Hexagon::neighbours(){
     std::vector<Hexagon> ret;
     for (int i = 0; i < 6; ++i){
@@ -35,12 +38,34 @@ std::vector<Hexagon> Hexagon::neighbours(){
     return ret;
 }
 
+/*
+    @returns: This function returns a vector of Edges which border this Hexagon
+ */
 std::vector<Edge> Hexagon::borders(){
-    return std::vector<Edge> {border(Side::W), border(Side::N), border(Side::E)};
+    return std::vector<Edge>
+    {
+        border(Side::W),
+        border(Side::N),
+        border(Side::E),
+        neighbour(5).border(Side::W),
+        neighbour(4).border(Side::N),
+        neighbour(3).border(Side::E)
+    };
 }
 
+/*
+    @returns: This function returns a vector of Vertex which are vertices of this hexagon
+ */
 std::vector<Vertex> Hexagon::corners(){
-    return std::vector<Vertex> {corner(Corner::L), corner(Corner::R)};
+    return std::vector<Vertex>
+    {
+        corner(Corner::L),
+        corner(Corner::R),
+        neighbour(2).corner(Corner::R),
+        neighbour(0).corner(Corner::L),
+        neighbour(3).corner(Corner::R),
+        neighbour(5).corner(Corner::L)
+        };
 }
 
 Hexagon Hexagon::operator+(const Hexagon& other){
@@ -55,10 +80,6 @@ Hexagon Hexagon::operator*(int factor){
     return Hexagon{a*factor, b*factor};
 }
 
-Hexagon operator*(int factor, const Hexagon& hex){
-    return Hexagon{hex.a*factor, hex.b*factor};
-}
-
 bool Hexagon::operator==(const Hexagon& other){
     return a == other.a && b == other.b;
 }
@@ -69,4 +90,12 @@ bool Hexagon::operator!=(const Hexagon& other){
 
 int Hexagon::length(){
     return int((std::abs(a) + std::abs(b) + std::abs(c))/2);
+}
+
+Hexagon operator*(int factor, const Hexagon& hex){
+    return Hexagon{hex.a*factor, hex.b*factor};
+}
+
+std::ostream& operator<<(std::ostream& out, const Hexagon& hex){
+    return out << "Hex(" << hex.a << ", " << hex.b << ")" << std::endl;
 }
