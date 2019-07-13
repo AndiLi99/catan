@@ -1,4 +1,4 @@
-    
+
 #ifndef DEVCARD
 #define DEVCARD
 #include <string>
@@ -17,3 +17,5 @@ public:
 	virtual ~DevCard();
 
 };
+
+#endif
