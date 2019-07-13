@@ -1,8 +1,13 @@
 #ifndef TILE
 #define TILE
 
-class Tile: public Hexagon {
+#include "hexagonGrid/hexagon.h"
+class Tile {
+		Hexagon hex;
+		Resource resource;
+		int rollNumber;
 	public:
-}
+
+};
 
 #endif

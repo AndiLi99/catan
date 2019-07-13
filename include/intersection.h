@@ -1,1 +1,3 @@
-class Intersection{};
+class Intersection{
+    
+};
