@@ -16,7 +16,7 @@ bool Edge::operator!=(const Edge& other){
     return !(*this == other);
 }
 std::ostream& operator<<(std::ostream& out, const Edge& edge){
-    out << "Edge(" << edge.a << ", " << edge.b << ", " << edge.s << ")" << std::endl;
+    return out << "Edge(" << edge.a << ", " << edge.b << ", " << edge.s << ")" << std::endl;
 }
 
 /*
