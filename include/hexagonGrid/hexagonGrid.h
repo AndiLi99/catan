@@ -30,66 +30,72 @@ class HexagonGrid{
 template<typename T1, typename T2, typename T3>
 std::vector<Hexagon> HexagonGrid<T1, T2, T3>::neighbours(Hexagon hex){
     std::vector<Hexagon> ret{hex.neighbours()};
-    // Remove faces which are not part of the board
-    std::remove_if(ret.begin, ret.end(), [](Hexagon h){return hexagons.find(h) == hexagons.end()})
+    std::remove_if(ret.begin, ret.end(),
+        [&hexagons_by_val=hexagons](Hexagon h)
+        {
+            return hexagons_by_val.find(h) == hexagons_by_val.end();
+        }
+    );
     return ret;
 }
 template<typename T1, typename T2, typename T3>
 std::vector<Edge> HexagonGrid<T1, T2, T3>::borders(Hexagon hex){
     std::vector<Edge> ret{hex.borders()};
-    // Remove edges which are not part of the board
-    std::remove_if(ret.begin, ret.end(), [](Edge e){return edges.find(e) == edges.end()})
+    std::remove_if(
+        ret.begin,
+        ret.end(),
+        [&edges_by_val=edges](Edge e)
+        {
+            return edges_by_val.find(e) == edges_by_val.end();
+        }
+    );
     return ret;
 }
 template<typename T1, typename T2, typename T3>
 std::vector<Vertex> HexagonGrid<T1, T2, T3>::corners(Hexagon hex){
     std::vector<Vertex> ret{hex.corners()};
-    // Remove vertices which are not part of the board
-    std::remove_if(ret.begin, ret.end(), [](Vertex v){return vertices.find(v) == vertices.end()})
+    std::remove_if(ret.begin, ret.end(), [&vertices_by_val=vertices](Vertex v){return vertices_by_val.find(v) == vertices_by_val.end();});
     return ret;
 }
 
 template<typename T1, typename T2, typename T3>
 std::vector<Hexagon> HexagonGrid<T1, T2, T3>::joins(Edge edge){
     std::vector<Hexagon> ret{edge.joins()};
-    // Remove faces which are not part of the board
-    std::remove_if(ret.begin, ret.end(), [](Hexagon h){return hexagons.find(h) == hexagons.end()})
+    std::remove_if(ret.begin, ret.end(), [&hexagons_by_val=hexagons](Hexagon h){return hexagons_by_val.find(h) == hexagons_by_val.end();});
     return ret;
 }
 template<typename T1, typename T2, typename T3>
 std::vector<Edge> HexagonGrid<T1, T2, T3>::continues(Edge edge){
     std::vector<Edge> ret{edge.continues()};
-    // Remove edges which are not part of the board
-    std::remove_if(ret.begin, ret.end(), [](Edge e){return edges.find(e) == edges.end()})
+    std::remove_if(ret.begin, ret.end(), [&edges_by_val=edges](Edge e){return edges_by_val.find(e) == edges_by_val.end();});
     return ret;
 }
 template<typename T1, typename T2, typename T3>
 std::vector<Vertex> HexagonGrid<T1, T2, T3>::endpoints(Edge edge){
     std::vector<Vertex> ret{edge.endpoints()};
-    // Remove vertices which are not part of the board
-    std::remove_if(ret.begin, ret.end(), [](Vertex v){return vertices.find(v) == vertices.end()})
+    std::remove_if(ret.begin, ret.end(), 
+        [&vertices_by_val=vertices](Vertex v){
+            return vertices_by_val.find(v) == vertices_by_val.end();
+        });
     return ret;
 }
 
 template<typename T1, typename T2, typename T3>
 std::vector<Hexagon> HexagonGrid<T1, T2, T3>::touches(Vertex vertex){
     std::vector<Hexagon> ret{vertex.touches()};
-    // Remove faces which are not part of the board
-    std::remove_if(ret.begin, ret.end(), [](Hexagon h){return hexagons.find(h) == hexagons.end()})
+    std::remove_if(ret.begin, ret.end(), [&hexagons_by_val=hexagons](Hexagon h){return hexagons_by_val.find(h) == hexagons_by_val.end();});
     return ret;
 }
 template<typename T1, typename T2, typename T3>
 std::vector<Edge> HexagonGrid<T1, T2, T3>::protrudes(Vertex vertex){
     std::vector<Edge> ret{vertex.protrudes()};
-    // Remove edges which are not part of the board
-    std::remove_if(ret.begin, ret.end(), [](Edge e){return edges.find(e) == edges.end()})
+    std::remove_if(ret.begin, ret.end(), [&edges_by_val=edges](Edge e){return edges_by_val.find(e) == edges_by_val.end();});
     return ret;
 }
 template<typename T1, typename T2, typename T3>
 std::vector<Vertex> HexagonGrid<T1, T2, T3>::adjacent(Vertex vertex){
     std::vector<Vertex> ret{vertex.adjacent()};
-    // Remove vertices which are not part of the board
-    std::remove_if(ret.begin, ret.end(), [](Vertex v){return vertices.find(v) == vertices.end()})
+    std::remove_if(ret.begin, ret.end(), [&vertices_by_val=vertices](Vertex v){return vertices_by_val.find(v) == vertices_by_val.end();});
     return ret;
 }
 #endif
