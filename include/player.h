@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 0111750f3e132fe30703a2ca1f5df022fb9be1f0
 #ifndef PLAYER
 #define PLAYER
 #include <vector>
