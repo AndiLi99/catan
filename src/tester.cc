@@ -2,6 +2,7 @@
 #include "hexagonGrid/edge.h"
 #include "hexagonGrid/hexagon.h"
 #include "hexagonGrid/vertex.h"
+#include "hexagonGrid/hexagonGrid.h"
 
 void complain(const char* name){
     std::cout << "Test failed: " << name << std::endl;
@@ -16,17 +17,17 @@ void equal_hex(const char* name, Hexagon hex1, Hexagon hex2){
 void equal_int(const char* name, int a, int b){
     if (a != b) complain(name);
 }
-// void equal_edge(const char* name, Edge e1, Edge e2){
-//     if (!(e1.a == e2.a && e1.b == e2.b && e1.s == e2.s)){
-//         complain(name);
-//     }
-// }
+void equal_edge(const char* name, Edge e1, Edge e2){
+    if (!(e1.a == e2.a && e1.b == e2.b && e1.s == e2.s)){
+        complain(name);
+    }
+}
 
-// void equal_vertex(const char* name, Vertex v1, Vertex v2){
-//     if (!(v1.a == v2.a && v1.b == v2.b && v1.c == v2.c)){
-//         complain(name);
-//     }
-// }
+void equal_vertex(const char* name, Vertex v1, Vertex v2){
+    if (!(v1.a == v2.a && v1.b == v2.b && v1.c == v2.c)){
+        complain(name);
+    }
+}
 
 void test_hex_math(){
     equal_hex("hex_add_1", Hexagon(1,2) + Hexagon(2, 3), Hexagon(3,5));
@@ -43,29 +44,29 @@ void test_hex_equals(){
     }
 }
 
-// void test_edge_equals(){
-//     if (Edge(2,3, Side::W) != Edge(2,3, Side::W)){
-//         complain("edge_inequality");
-//     }
-//     if (Edge(1,1, Side::W) == Edge (0,1, Side::W)){
-//         complain("edge_equality_1");
-//     }
-//     if (Edge(1,1, Side::W) == Edge (1,1, Side::N)){
-//         complain("edge_equality_2");
-//     }
-// }
+void test_edge_equals(){
+    if (Edge(2,3, Side::W) != Edge(2,3, Side::W)){
+        complain("edge_inequality");
+    }
+    if (Edge(1,1, Side::W) == Edge (0,1, Side::W)){
+        complain("edge_equality_1");
+    }
+    if (Edge(1,1, Side::W) == Edge (1,1, Side::N)){
+        complain("edge_equality_2");
+    }
+}
 
-// void test_vertex_equals(){
-//     if (Vertex(2,3, Corner::L) != Vertex(2,3, Corner::L)){
-//         complain("Vertex_inequality");
-//     }
-//     if (Vertex(1,1, Corner::L) == Vertex (0,1, Corner::L)){
-//         complain("Vertex_equality_1");
-//     }
-//     if (Vertex(1,1, Corner::R) == Vertex (1,1, Corner::L)){
-//         complain("Vertex_equality_2");
-//     }
-// }
+void test_vertex_equals(){
+    if (Vertex(2,3, Corner::L) != Vertex(2,3, Corner::L)){
+        complain("Vertex_inequality");
+    }
+    if (Vertex(1,1, Corner::L) == Vertex (0,1, Corner::L)){
+        complain("Vertex_equality_1");
+    }
+    if (Vertex(1,1, Corner::R) == Vertex (1,1, Corner::L)){
+        complain("Vertex_equality_2");
+    }
+}
 
 void test_hex_directions(){
     equal_hex("hex_direction_0", Hexagon(1,0), Hexagon::hex_direction(0));
@@ -90,6 +91,8 @@ void test_all(){
     test_hex_math();
     test_hex_neighbour();
     test_hex_length();
+    test_edge_equals();
+    test_vertex_equals();
     for (Hexagon h: Hexagon(0,0).neighbours()){
         std::cout << h;
     }
