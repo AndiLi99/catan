@@ -12,7 +12,6 @@
 #include "tile.h"
 #include "road.h"
 #include "settlement.h"
-#include "harvester.h"
 
 using HexagonSet = std::unordered_set<Hexagon, HexagonHash, HexagonEquals>;
 using EdgeSet = std::unordered_set<Edge, EdgeHash, EdgeEquals>;
