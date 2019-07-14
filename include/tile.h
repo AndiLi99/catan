@@ -1,15 +1,15 @@
 #ifndef TILE
 #define TILE
 
-#include "hexagonGrid/hexagon.h"
-#include "resource.h"
+#include "tileType.h"
 #include <optional>
 class Tile {
-		std::optional<Resource> resource;
+		TileType type;
 		std::optional<int> rollNumber;
 	public:
-		bool isResource(Resource resource);
-		bool isRollNum(int roll);
+		Tile(TileType type, std::optional<int> rollNumber);
+		TileType getType();
+		bool isRollNum(int number);
 };
 
 #endif
