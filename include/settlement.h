@@ -1,11 +1,14 @@
 #ifndef SETTLEMENT_H
 #define SETTLEMENT_H
 
-#include "harvester.h"
-class Settlement: Harvester{
+class Settlement{
+        int playerID;
+        int productionRate;
+        static const int MAX_UPGRADES = 1;
     public:
-        int productionRate() override{
-            return 1;
-        }
+        Settlement(int playerID);
+        int ownedBy();
+        void upgrade();
+        int productionRate();
 };
 #endif
