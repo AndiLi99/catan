@@ -36,7 +36,7 @@ class Board {
         RoadMap roads;
         SettlementMap settlements;
 		std::optional<Hexagon> robber;
-		friend BoardBuilder Board();
+		Board();
 		std::vector<Hexagon> hexagonsWithNumber(int roll);
 
 	public:
@@ -47,5 +47,6 @@ class Board {
 		std::vector<Edge> getRoads(int playerID);
 		std::vector<Vertex> getSettlements(int playerID);
 		std::vector<int> moveRobber(Hexagon location);
+		friend class BoardBuilder;
 };
 #endif
