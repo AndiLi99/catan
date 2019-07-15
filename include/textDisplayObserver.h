@@ -2,8 +2,10 @@
 #define TEXTDISPLAYOBSERVER
 #include "observer.h"
 
+class GameState;
+
 class TextDisplay: public Observer {
-	gameState *subject;
+	GameState *subject;
 
 	void printPlayers();
 	void printBoard();
@@ -11,7 +13,7 @@ class TextDisplay: public Observer {
 	void printVictoryPoints();
 	void printWin();
 public:
-	TextDisplay(gameState *);
+	TextDisplay(GameState *);
 	void notify() override;
 	~TextDisplay();
 };

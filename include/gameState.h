@@ -6,6 +6,7 @@
 #include "board.h"
 #include <vector>
 
+struct HexagonGrid;
 enum class GamePhase{};
 class GameState: public Subject{
         int turnPlayer;
