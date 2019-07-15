@@ -3,9 +3,9 @@
 
 #include <unordered_map>
 #include <unordered_set>
-#include "hexagon.h"
-#include "edge.h"
-#include "vertex.h"
+#include "hexagonGrid/hexagon.h"
+#include "hexagonGrid/edge.h"
+#include "hexagonGrid/vertex.h"
 #include "tile.h"
 #include "road.h"
 #include "settlement.h"
