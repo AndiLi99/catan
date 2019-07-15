@@ -1,10 +1,5 @@
 #include "../include/developmentDeck.h"
 #include "../include/devCard/devCard.h"
-#include "../include/devCard/knight.h"
-#include "../include/devCard/yearOfPlenty.h"
-#include "../include/devCard/monopoly.h"
-#include "../include/devCard/buildRoad.h"
-#include "../include/devCard/victoryPoint.h"
 
 #include <stdlib.h>
 #include <time.h>

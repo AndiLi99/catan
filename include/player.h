@@ -1,4 +1,3 @@
-
 #ifndef PLAYER
 #define PLAYER
 #include <vector>

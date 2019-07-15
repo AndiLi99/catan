@@ -155,18 +155,26 @@ void Player::buyDevCard(developmentDeck & cardDeck){
 	else{
 		throw "not enough resources to buy development card";
 	}
+<<<<<<< HEAD
+}
+=======
 
 }
 
+>>>>>>> 0111750f3e132fe30703a2ca1f5df022fb9be1f0
 void Player::showDevCard(){
 	//must change to iterator in the future
 	for (int i = 0; i < developmentCards.size(); i++){
 		cout << "Option" << i << ": " << developmentCards[i].getName() << endl;
 	}
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0111750f3e132fe30703a2ca1f5df022fb9be1f0
 //takes in the
 void Player::useDevCard(int i){
 	developmentCards.at(i).playCard();//
 }
+<<<<<<< HEAD
 */
