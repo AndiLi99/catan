@@ -10,5 +10,6 @@ class Settlement{
         int ownedBy();
         void upgrade();
         int productionRate();
+        bool isCity();
 };
 #endif
