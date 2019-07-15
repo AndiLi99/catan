@@ -1,15 +1,18 @@
 #ifndef BOARD_FACTORY_H
 #define BOARD_FACTORY_H
 
-#include "board.h"
+class Board;
+class Hexagon;
+
 class BoardBuilder{
+    void addHexagon(Hexagon hex);
     void resetTiles();
     void resetConnections();
     void resetIntersections();
     void resetBoard();
 
-    void defaultSetup();
     void randomSetup();
+    Board defaultSetup();
 };
 
 #endif
