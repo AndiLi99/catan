@@ -5,6 +5,7 @@
 #include "hexagonGrid/side.h"
 #include "hexagonGrid/corner.h"
 #include <cmath>
+#include <cassert>
 #include <vector>
 
 const Hexagon Hexagon::HEX_DIRECTION[6] = {
@@ -16,6 +17,9 @@ const Hexagon Hexagon::HEX_DIRECTION[6] = {
     Hexagon {0,1}};
 
 Hexagon::Hexagon(int a, int b): a{a}, b{b}, c{-a-b} {}
+Hexagon::Hexagon(int a, int b, int c): a{a}, b{b}, c{c} {
+    assert(a+b+c == 0);
+}
 
 Hexagon Hexagon::hex_direction(int direction){
     return Hexagon::HEX_DIRECTION[positive_modulo(direction, 6)];
