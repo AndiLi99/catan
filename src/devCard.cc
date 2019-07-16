@@ -1,5 +1,5 @@
 #include <string>
-#include "../../include/devCard/devCard.h"
+#include "devCard/devCard.h"
 using namespace std;
 
 //constructor 

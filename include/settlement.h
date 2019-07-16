@@ -8,8 +8,8 @@ class Settlement{
     public:
         Settlement(int playerID);
         int ownedBy();
-        void upgrade();
-        int productionRate();
+        void upgradeToCity();
+        int getProductionRate();
         bool isCity();
 };
 #endif

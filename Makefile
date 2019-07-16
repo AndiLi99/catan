@@ -7,7 +7,7 @@ TARGET := bin/catan
 SRCEXT := cc
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -std=c++14 -Wall -MMD
+CFLAGS := -g -std=c++17 -Wall -MMD
 INC := -I include
 
 $(TARGET): $(OBJECTS)

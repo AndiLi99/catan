@@ -2,7 +2,6 @@
 #include "hexagonGrid/edge.h"
 #include "hexagonGrid/hexagon.h"
 #include "hexagonGrid/vertex.h"
-#include "hexagonGrid/hexagonGrid.h"
 
 void complain(const char* name){
     std::cout << "Test failed: " << name << std::endl;
