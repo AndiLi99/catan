@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "commandParser.h"
+#include "gameState.h"
 
 using namespace std;
 
