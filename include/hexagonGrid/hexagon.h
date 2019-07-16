@@ -15,6 +15,7 @@ class Hexagon {
     int b;
     int c;
     Hexagon(int a, int b);
+    Hexagon(int a, int b, int c);
     bool operator==(const Hexagon& other);
     bool operator!=(const Hexagon& other);
     Hexagon operator+(const Hexagon& other);

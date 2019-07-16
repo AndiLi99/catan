@@ -2,6 +2,7 @@
 #include "hexagonGrid/edge.h"
 #include "hexagonGrid/hexagon.h"
 #include "hexagonGrid/vertex.h"
+#include "hexagonGrid.h"
 
 void complain(const char* name){
     std::cout << "Test failed: " << name << std::endl;
@@ -84,14 +85,8 @@ void test_hex_neighbour(){
 void test_hex_length(){
     equal_int("hex_length", 2, Hexagon(2,-1).length());
 }
-void test_all(){
-    test_hex_equals();
-    test_hex_directions();
-    test_hex_math();
-    test_hex_neighbour();
-    test_hex_length();
-    test_edge_equals();
-    test_vertex_equals();
+
+void print_relationships(){
     std::cout << "Testing Hexagon neighbours" << std::endl;
     for (Hexagon h: Hexagon(0,0).neighbours()){
         std::cout << h;
@@ -128,6 +123,40 @@ void test_all(){
     for (Vertex h: Vertex(0,0, Corner::R).adjacent()){
         std::cout << h;
     }
+}
+void printHexVect(std::vector<Hexagon> vect){
+    for (Hexagon h: vect){
+        std::cout << h;
+    }
+}
+void printVertVect(std::vector<Vertex> vect){
+    for (Vertex h: vect){
+        std::cout << h;
+    }
+}
+void test_hexagon_gen(){
+    HexagonGrid hexagonGrid(2);
+    std::vector<Hexagon> vect = hexagonGrid.getPointyTopHexOrder(2);
+    printHexVect(vect);
+}
+void test_vertex_gen(){
+    HexagonGrid hexagonGrid(2);
+    std::vector<Vertex> vect = hexagonGrid.getPointyTopVertexOrder(2);
+    printVertVect(vect);
+    std::cout << vect.size() << std::endl;
+}
+
+
+void test_all(){
+    test_hex_equals();
+    test_hex_directions();
+    test_hex_math();
+    test_hex_neighbour();
+    test_hex_length();
+    test_edge_equals();
+    test_vertex_equals();
+    test_hexagon_gen();
+    test_vertex_gen();
 }
 
 /*

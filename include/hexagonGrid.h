@@ -18,9 +18,10 @@ using RoadMap = std::unordered_map<Edge, Road, EdgeHash, EdgeEquals>;
 using SettlementMap = std::unordered_map<Vertex, Settlement, VertexHash, VertexEquals>;
 
 class HexagonGrid{
+
         HexagonSet validHexagons;
         EdgeSet validEdges;
-        Vertex validVertices;
+        VertexSet validVertices;
         /*
             tiles, connections and intersections invariant:
             The keys to these hashmaps must be in the set of their respective
@@ -30,6 +31,7 @@ class HexagonGrid{
         RoadMap roads;
         SettlementMap settlements;
     public:
+        HexagonGrid(int radius);
         const Tile& cgetTile(Hexagon hex);
         const Road& cgetRoad(Edge edge);
         const Settlement& cgetSettlement(Vertex vertex);
@@ -39,6 +41,8 @@ class HexagonGrid{
         void addTile(Hexagon hex, Tile tile);
         void addRoad(Edge edge, Road road);
         void addSettlement(Vertex vertex, Settlement settlement);
-
+        std::vector<Hexagon> getPointyTopHexOrder(int radius);
+        std::vector<Edge> getPointyTopEdgeOrder(int radius);
+        std::vector<Vertex> getPointyTopVertexOrder(int radius);
 };
 #endif
