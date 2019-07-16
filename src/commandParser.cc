@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//takes in a string sentence to tokenizes into individual words
 vector <string> CommandParser::splitString(string str, char delim){
 	vector<string> cont;
     stringstream ss(str);
@@ -48,17 +49,18 @@ int CommandParser::commandPtoOptions(string commandWord){
 	return -1;
 }
 
+//switch statment relating to the second command in p (p r/s/c/d)
 void CommandParser::commandP(vector <string> input){
 	enum Options {r = 1, s = 2, c = 3, d = 4};
 	//p has already been validated, need to validate second character in command
 	switch(commandPtoOptions(input[1])){
-		case r:	cout << "success" <<endl;
+		case r:	cout<<printInput(input)<<endl;/*call gamstateFunction*/
 				break;
-		case s:	cout << "success" <<endl;
+		case s:	cout<<printInput(input)<<endl;/*call gamstateFunction*/
 				break;
-		case c:	cout << "success" <<endl;
+		case c:	cout<<printInput(input)<<endl;/*call gamstateFunction*/
 				break;
-		case d:	cout << "success" <<endl;
+		case d:	cout<<printInput(input)<<endl;/*call gamstateFunction*/
 				break;
 		default:
 				cout << "p * command not valid" << endl;
@@ -66,6 +68,7 @@ void CommandParser::commandP(vector <string> input){
 	}
 }
 
+//check to see if coordinate is within the range of valid coordinates for each hexagon
 bool CommandParser::isValidCoord(int val){
 	if (val == -2 || val == -1 || val == 0 || val == 1 || val == 2){
 		return true;
@@ -73,6 +76,7 @@ bool CommandParser::isValidCoord(int val){
 	return false;
 }
 
+//converts a string value to an integer value
 int CommandParser::convertToInt(string val){
 	//might need to throw if not valid int conversion
 	stringstream converter(val);
@@ -87,12 +91,15 @@ int CommandParser::convertToInt(string val){
 	return temp;
 }
 
+//conversion of string command to a corresponding integer needed for enumeration and switch statements
 int CommandParser::commandBOptions(string val){
 	if(val == "r"){return 1;}
 	if(val == "s"){return 2;}
 	if(val == "c"){return 3;}
 	return -1;
 }
+
+//conversion of string command to a corresponding integer needed for enumeration and switch statements
 int CommandParser::ConvertToDirections(string val){
 	if(val == "W"){return 1;}
 	if(val == "N"){return 2;}
@@ -102,6 +109,7 @@ int CommandParser::ConvertToDirections(string val){
 	return -1;
 }
 
+//prints the input that was given
 string CommandParser::printInput(vector <string> input){
 	string sentence;
 	for(auto it = input.begin(); it !=input.end(); ++it){
@@ -149,6 +157,7 @@ void CommandParser::commandLR(vector <string> input, string typeOfSettlement){
 	}
 }
 
+//second switch statement for options relating to b command (b /r/s/c a b /W/N/E/L/R)
 void CommandParser::commandB(vector <string> input){
 	enum Options{r = 1, s = 2, c = 3};
 	int a;
@@ -179,6 +188,7 @@ void CommandParser::commandB(vector <string> input){
 	}
 }
 
+//function which takes in the user command and calls the associated gameState object.
 void CommandParser::parse(string input){
 
 	vector <string> parsedString;
@@ -212,21 +222,22 @@ void CommandParser::parse(string input){
 						else{
 							cout <<"Error: m r coordinate values not valid"<<endl;
 						}
+
 					}
 					else{cout<<"Error: m * commnd not valid"<<endl;}
 				}
 				else{cout<<"Error: too many m commands"<<endl;}
 				break;
 		case r:
-				if(parsedString.size() == 1){cout<<printInput(parsedString)<<endl;/*call gamestate roll dice*/}
+				if(parsedString.size() == 1){cout<<printInput(parsedString)<<endl;/*g.rollDice()*/}
 				else{cout<<"Error: too many r commands"<<endl;}
 				break;
 		case e:
-				if(parsedString.size() == 1){cout<<printInput(parsedString)<<endl;/*call gamestate end turn*/}
+				if(parsedString.size() == 1){cout<<printInput(parsedString)<<endl;/*g.endTurn()*/}
 				else{cout<<"Error: too many e commands"<<endl;}
 				break;
 		case t:
-				if(parsedString[1] == "p" && parsedString.size() == 2){/*call tradeLater*/}
+				if(parsedString[1] == "p" && parsedString.size() == 2){/*g.tradeLater()*/}
 				else{cout<<"Error:t command not valid"<<endl;}
 				break;
 		default:
