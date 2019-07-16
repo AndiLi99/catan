@@ -11,6 +11,9 @@ TextDisplay::TextDisplay(GameState* gameState): subject{gameState}{
     gameState->attach(this);
 }
 
+TextDisplay::~TextDisplay(){}
+
+void TextDisplay::notify(){}
 
 vector<int> numberGen(){
 	vector<int> placeHolder;
