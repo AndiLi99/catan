@@ -9,9 +9,11 @@ class TextDisplay: public Observer {
 
 	void printPlayers();
 	void printBoard();
+	void printCoordBoard();
 	void printResources();
 	void printVictoryPoints();
 	void printWin();
+	void printGame();
 public:
 	TextDisplay(GameState *);
 	void notify() override;

@@ -14,9 +14,12 @@ class GameState: public Subject{
         int turnPlayer;
     public:
         GameState(Board board, std::vector<Player> players, int numPlayers);
-        void buySettlement(Vertex vertex);
-        void buyCity(Vertex vertex);
-        void buyRoad(Edge edge);
+        void buildSettlement(Vertex vertex);
+        void buildCity(Vertex vertex);
+        void buildRoad(Edge edge);
+        void purchaseSettlement();
+        void purchaseCity();
+        void purchaseRoad();
         ResourceArray getResources();
         void rollDice();
         void endTurn();
