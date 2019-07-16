@@ -7,7 +7,13 @@
 #include <cmath>
 #include <vector>
 
-const Hexagon Hexagon::HEX_DIRECTION[6] = {Hexagon {1,0}, Hexagon {1,-1}, Hexagon {0,-1}, Hexagon {-1,0}, Hexagon {-1,1}, Hexagon {0,1}};
+const Hexagon Hexagon::HEX_DIRECTION[6] = {
+    Hexagon {1,0},
+    Hexagon {1,-1},
+    Hexagon {0,-1},
+    Hexagon {-1,0},
+    Hexagon {-1,1},
+    Hexagon {0,1}};
 
 Hexagon::Hexagon(int a, int b): a{a}, b{b}, c{-a-b} {}
 
@@ -47,8 +53,8 @@ std::vector<Edge> Hexagon::borders(){
         border(Side::W),
         border(Side::N),
         border(Side::E),
-        neighbour(5).border(Side::W),
-        neighbour(4).border(Side::N),
+        neighbour(1).border(Side::W),
+        neighbour(2).border(Side::N),
         neighbour(3).border(Side::E)
     };
 }
@@ -61,10 +67,10 @@ std::vector<Vertex> Hexagon::corners(){
     {
         corner(Corner::L),
         corner(Corner::R),
-        neighbour(2).corner(Corner::R),
+        neighbour(4).corner(Corner::R),
         neighbour(0).corner(Corner::L),
         neighbour(3).corner(Corner::R),
-        neighbour(5).corner(Corner::L)
+        neighbour(1).corner(Corner::L)
         };
 }
 

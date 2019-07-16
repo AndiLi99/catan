@@ -15,9 +15,11 @@ class Edge {
     int b;
     Side s;
     Edge(int a, int b, Side s);
+    Edge(Hexagon hex, Side s);
     bool operator==(const Edge&);
     bool operator!=(const Edge&);
     friend std::ostream& operator<<(std::ostream& out, const Edge& edge);
+    Hexagon hex();
     std::vector<Hexagon> joins();
     std::vector<Edge> continues();
     std::vector<Vertex> endpoints();

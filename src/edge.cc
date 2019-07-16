@@ -7,6 +7,7 @@
 #include <iostream>
 
 Edge::Edge(int a, int b, Side s): a{a}, b{b}, s{s} {}
+Edge::Edge(Hexagon hex, Side s): a{hex.a}, b{hex.b}, s{s} {}
 
 bool Edge::operator==(const Edge& other){
     return (a == other.a && b == other.b && s == other.s);
@@ -17,6 +18,10 @@ bool Edge::operator!=(const Edge& other){
 }
 std::ostream& operator<<(std::ostream& out, const Edge& edge){
     return out << "Edge(" << edge.a << ", " << edge.b << ", " << edge.s << ")" << std::endl;
+}
+
+Hexagon Edge::hex(){
+    return Hexagon{a, b};
 }
 
 /*
@@ -45,20 +50,20 @@ std::vector<Edge> Edge::continues(){
         case Side::N: return std::vector<Edge>{
             Edge{a, b, Side::W},
             Edge{a, b, Side::E},
-            Edge{a, b-1, Side::E},
-            Edge{a+1, b, Side::W},
+            Edge{hex().neighbour(4), Side::E},
+            Edge{hex().neighbour(0), Side::W},
         };
         case Side::E: return std::vector<Edge>{
             Edge{a, b, Side::N},
-            Edge{a, b+1, Side::W},
-            Edge{a, b+1, Side::N},
-            Edge{a+1, b, Side::W},
+            Edge{hex().neighbour(1), Side::W},
+            Edge{hex().neighbour(0), Side::W},
+            Edge{hex().neighbour(1), Side::N},
         };
         case Side::W: return std::vector<Edge>{
             Edge{a, b, Side::N},
-            Edge{a-1, b, Side::E},
-            Edge{a-1, b, Side::N},
-            Edge{a, b-1, Side::E},
+            Edge{hex().neighbour(3), Side::E},
+            Edge{hex().neighbour(3), Side::N},
+            Edge{hex().neighbour(4), Side::E},
         };
     }
     

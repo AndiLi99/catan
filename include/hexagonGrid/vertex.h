@@ -13,9 +13,11 @@ class Vertex{
     int b;
     Corner c;
     Vertex(int a, int b, Corner c);
+    Vertex(Hexagon hex, Corner c);
     bool operator==(const Vertex&);
     bool operator!=(const Vertex&);
     friend std::ostream& operator<<(std::ostream& out, const Vertex& vertex);
+    Hexagon hex();
     std::vector<Hexagon> touches();
     std::vector<Edge> protrudes();
     std::vector<Vertex> adjacent();
