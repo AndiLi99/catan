@@ -92,7 +92,40 @@ void test_all(){
     test_hex_length();
     test_edge_equals();
     test_vertex_equals();
+    std::cout << "Testing Hexagon neighbours" << std::endl;
     for (Hexagon h: Hexagon(0,0).neighbours()){
+        std::cout << h;
+    }
+    std::cout << "Testing Hexagon borders" << std::endl;
+    for (Edge h: Hexagon(0,0).borders()){
+        std::cout << h;
+    }
+    std::cout << "Testing Hexagon corners" << std::endl;
+    for (Vertex h: Hexagon(0,0).corners()){
+        std::cout << h;
+    }
+    std::cout << "Testing Edge joins" << std::endl;
+    for (Hexagon h: Edge(0,0, Side::N).joins()){
+        std::cout << h;
+    }
+    std::cout << "Testing Edge continues" << std::endl;
+    for (Edge h: Edge(0,0, Side::N).continues()){
+        std::cout << h;
+    }
+    std::cout << "Testing Edge endpoints" << std::endl;
+    for (Vertex h: Edge(0,0, Side::N).endpoints()){
+        std::cout << h;
+    }
+    std::cout << "Testing Vertex touches" << std::endl;
+    for (Hexagon h: Vertex(0,0, Corner::R).touches()){
+        std::cout << h;
+    }
+    std::cout << "Testing Vertex protrudes" << std::endl;
+    for (Edge h: Vertex(0,0, Corner::R).protrudes()){
+        std::cout << h;
+    }
+    std::cout << "Testing Vertex adjacent" << std::endl;
+    for (Vertex h: Vertex(0,0, Corner::R).adjacent()){
         std::cout << h;
     }
 }
