@@ -1,8 +1,13 @@
 #include "gameState.h"
 
-GameState::GameState(Board board, std::vector<Player> players): board{board}, players{players}{}
+GameState::GameState(Board board, std::vector<Player> players): board{board}, players{players}{
+    turnPlayer = 1;
+}
 GameState::~GameState(){}
 
+int GameState::indexFromPlayerID(int playerID){
+    return playerID -1;
+}
 void GameState::buildSettlement(Vertex vertex){
     
 }
@@ -10,7 +15,7 @@ void GameState::buildCity(Vertex vertex){
     
 }
 void GameState::buildRoad(Edge edge){
-    notifyObservers();
+    board.addRoad(edge, turnPlayer);
 }
 void GameState::purchaseSettlement(){
     

@@ -12,6 +12,7 @@ class GameState: public Subject{
         Board board;
         std::vector<Player> players;
         int turnPlayer;
+        int indexFromPlayerID(int);
     public:
         GameState(Board board, std::vector<Player> players);
         ~GameState();

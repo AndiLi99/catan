@@ -8,7 +8,7 @@
 
 using namespace std;
 
-
+/* 
 int main(){
  //printRefBoard();
  //printBoard()
@@ -18,3 +18,4 @@ int main(){
  	test.parse(input);
  }
 }
+*/

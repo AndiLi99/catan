@@ -17,6 +17,8 @@ using TileMap = std::unordered_map<Hexagon, Tile, HexagonHash, HexagonEquals>;
 using RoadMap = std::unordered_map<Edge, Road, EdgeHash, EdgeEquals>;
 using SettlementMap = std::unordered_map<Vertex, Settlement, VertexHash, VertexEquals>;
 
+class HexagonGridBuilder;
+
 class HexagonGrid{
 
         HexagonSet validHexagons;
@@ -34,8 +36,9 @@ class HexagonGrid{
         std::vector<Hexagon> getPointyTopHexOrder(int radius);
         std::vector<Edge> getPointyTopEdgeOrder(int radius);
         std::vector<Vertex> getPointyTopVertexOrder(int radius);
-    public:
         HexagonGrid(int radius);
+        friend class HexagonGridBuilder;
+    public:
         const Tile& cgetTile(Hexagon hex);
         const Road& cgetRoad(Edge edge);
         const Settlement& cgetSettlement(Vertex vertex);

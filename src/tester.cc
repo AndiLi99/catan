@@ -5,6 +5,7 @@
 #include "hexagonGrid.h"
 #include "gameState.h"
 #include "textDisplayObserver.h"
+#include "hexagonGridBuilder.h"
 
 void complain(const char* name){
     std::cout << "Test failed: " << name << std::endl;
@@ -142,37 +143,39 @@ void printEdgeVect(std::vector<Edge> vect){
     }
 }
 void test_hexagon_gen(){
-    HexagonGrid hexagonGrid(2);
-    std::vector<Hexagon> vect = hexagonGrid.getPointyTopHexOrder(2);
+    HexagonGrid hexagonGrid = HexagonGridBuilder::defaultGrid();
+    std::vector<Hexagon> vect = hexagonGrid.getHexPrintOrder();
     printHexVect(vect);
     std::cout << vect.size() << std::endl;
 }
 void test_vertex_gen(){
-    HexagonGrid hexagonGrid(2);
-    std::vector<Vertex> vect = hexagonGrid.getPointyTopVertexOrder(2);
+    HexagonGrid hexagonGrid = HexagonGridBuilder::defaultGrid();
+    std::vector<Vertex> vect = hexagonGrid.getVertexPrintOrder();
     printVertVect(vect);
     std::cout << vect.size() << std::endl;
 }
 void test_edge_gen(){
-    HexagonGrid hexagonGrid(2);
-    std::vector<Edge> vect = hexagonGrid.getPointyTopEdgeOrder(2);
+    HexagonGrid hexagonGrid = HexagonGridBuilder::defaultGrid();
+    std::vector<Edge> vect = hexagonGrid.getEdgePrintOrder();
     printEdgeVect(vect);
     std::cout << vect.size() << std::endl;
 }
 
 void test_game_state(){
-    
+    HexagonGrid hexGrid = HexagonGridBuilder::defaultGrid();
+    Board board{hexGrid};
+    std::vector<Player> players{Player{}};
+    GameState gameState{board, players};
+    TextDisplay textDisplay{&gameState};
+
+    gameState.buildRoad(Edge{0,0, Side::N});
+    gameState.notifyObservers();
 }
 void test_all(){
-    HexagonGrid hexGrid{2};
-    Board board{hexGrid};
-    std::vector<Player> players;
-    GameState gameState{board, players};
-    TextDisplay{gameState};
+    test_game_state();
 }
 
-/*
+
 int main(){
     test_all();
 }
-*/

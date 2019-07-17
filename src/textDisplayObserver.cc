@@ -46,7 +46,7 @@ char TextDisplay::getRoad(Edge edge){
 
 string TextDisplay::getSettlement(Vertex vert){
     if (gameState->emptyVertex(vert)){
-        return "   ";
+        return "( )";
     } else {
         const Settlement& settlement = gameState->cgetSettlement(vert);
         if (settlement.isCity()){
