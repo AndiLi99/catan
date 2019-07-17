@@ -2,6 +2,18 @@
 
 Board::Board(HexagonGrid hexGrid): hexGrid{hexGrid}{}
 
+void Board::addSettlement(Vertex vertex, int playerID){
+    hexGrid.addSettlement(vertex, Settlement{playerID});
+}
+
+void Board::upgradeSettlement(Vertex vertex){
+    hexGrid.upgradeSettlement(vertex);
+}
+
+void Board::addRoad(Edge edge, int playerID){
+    hexGrid.addRoad(edge, Road{playerID});
+}
+
 std::vector<Edge> Board::getEdgePrintOrder(){
     return hexGrid.getEdgePrintOrder();
 }
