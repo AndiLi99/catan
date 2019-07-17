@@ -1,6 +1,32 @@
 #include "gameState.h"
 
 GameState::GameState(Board board, std::vector<Player> players): board{board}, players{players}{}
+GameState::~GameState(){}
+
+void GameState::buildSettlement(Vertex vertex){
+    
+}
+void GameState::buildCity(Vertex vertex){
+    
+}
+void GameState::buildRoad(Edge edge){
+    notifyObservers();
+}
+void GameState::purchaseSettlement(){
+    
+}
+void GameState::purchaseCity(){
+    
+}
+void GameState::purchaseRoad(){
+    
+}
+void GameState::rollDice(){
+    
+}
+void GameState::endTurn(){
+    
+}
 
 std::vector<Edge> GameState::getEdgePrintOrder(){
     return board.getEdgePrintOrder();

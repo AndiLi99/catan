@@ -14,6 +14,7 @@ class GameState: public Subject{
         int turnPlayer;
     public:
         GameState(Board board, std::vector<Player> players);
+        ~GameState();
         void buildSettlement(Vertex vertex);
         void buildCity(Vertex vertex);
         void buildRoad(Edge edge);
@@ -23,7 +24,6 @@ class GameState: public Subject{
         ResourceArray getResources();
         void rollDice();
         void endTurn();
-        const HexagonGrid& getGrid();
         std::vector<Hexagon> getHexPrintOrder();
         std::vector<Edge> getEdgePrintOrder();
         std::vector<Vertex> getVertexPrintOrder();
