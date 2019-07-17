@@ -47,6 +47,7 @@ class HexagonGrid{
         void addTile(Hexagon hex, Tile tile);
         void addRoad(Edge edge, Road road);
         void addSettlement(Vertex vertex, Settlement settlement);
+        void upgradeSettlement(Vertex vertex);
         std::vector<Hexagon> getHexPrintOrder();
         std::vector<Edge> getEdgePrintOrder();
         std::vector<Vertex> getVertexPrintOrder();

@@ -163,3 +163,8 @@ void HexagonGrid::addRoad(Edge edge, Road road){
 void HexagonGrid::addSettlement(Vertex vertex, Settlement settlement){
     settlements.insert_or_assign(vertex, settlement);
 }
+void HexagonGrid::upgradeSettlement(Vertex vertex){
+    if (!emptyVertex(vertex)){
+        settlements.at(vertex).upgradeToCity();
+    }
+}
