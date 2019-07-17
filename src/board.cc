@@ -1,5 +1,7 @@
 #include "board.h"
 
+Board::Board(HexagonGrid hexGrid): hexGrid{hexGrid}{}
+
 std::vector<Edge> Board::getEdgePrintOrder(){
     return hexGrid.getEdgePrintOrder();
 }
