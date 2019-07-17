@@ -13,7 +13,7 @@ class GameState: public Subject{
         std::vector<Player> players;
         int turnPlayer;
     public:
-        GameState(Board board, std::vector<Player> players, int numPlayers);
+        GameState(Board board, std::vector<Player> players);
         void buildSettlement(Vertex vertex);
         void buildCity(Vertex vertex);
         void buildRoad(Edge edge);
@@ -24,6 +24,14 @@ class GameState: public Subject{
         void rollDice();
         void endTurn();
         const HexagonGrid& getGrid();
+        vector<Hexagon> getHexPrintOrder();
+        vector<Edge> getEdgePrintOrder();
+        vector<Vertex> getVertexPrintOrder();
+        const Tile& cgetTile(Hexagon hex);
+        const Road& cgetRoad(Edge edge);
+        const Settlement& cgetSettlement(Vertex vertex);
+        bool emptyEdge(Edge edge);
+        bool emptyVertex(Vertex vert);
 };
 
 #endif

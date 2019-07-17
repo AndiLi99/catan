@@ -4,16 +4,14 @@
 #include <optional>
 #include "hexagonGrid.h"
 
-class BoardBuilder;
 struct ResourceArray;
 
 class Board {
 		HexagonGrid hexGrid;
 		std::optional<Hexagon> robber;
-		Board();
 		std::vector<Hexagon> hexagonsWithNumber(int roll);
-
 	public:
+		Board(HexagonGrid hexGrid);
 		void addSettlement(Vertex vertex, int playerID);
 		void upgradeSettlement(Vertex vertex);
 		void addRoad(Edge edge, int playerID);
@@ -23,6 +21,5 @@ class Board {
 		std::vector<int> moveRobber(Hexagon location);
 		const HexagonGrid& getGrid();
 		Hexagon getRobber();
-		friend class BoardBuilder;
 };
 #endif

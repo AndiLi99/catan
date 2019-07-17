@@ -5,6 +5,6 @@ class Road{
         int playerID;
     public:
         Road(int playerID);
-        int ownedBy();
+        int ownedBy() const;
 };
 #endif

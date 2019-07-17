@@ -8,8 +8,9 @@ class Tile {
 		std::optional<int> rollNumber;
 	public:
 		Tile(TileType type, std::optional<int> rollNumber);
-		TileType getType();
+		TileType getType() const;
 		bool isRollNum(int number);
+		int getRollNumber() const;
 };
 
 #endif

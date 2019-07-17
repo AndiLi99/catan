@@ -3,6 +3,8 @@
 #include "hexagonGrid/hexagon.h"
 #include "hexagonGrid/vertex.h"
 #include "hexagonGrid.h"
+#include "gameState.h"
+#include "textDisplayObserver.h"
 
 void complain(const char* name){
     std::cout << "Test failed: " << name << std::endl;
@@ -134,10 +136,16 @@ void printVertVect(std::vector<Vertex> vect){
         std::cout << h;
     }
 }
+void printEdgeVect(std::vector<Edge> vect){
+    for (Edge h: vect){
+        std::cout << h;
+    }
+}
 void test_hexagon_gen(){
     HexagonGrid hexagonGrid(2);
     std::vector<Hexagon> vect = hexagonGrid.getPointyTopHexOrder(2);
     printHexVect(vect);
+    std::cout << vect.size() << std::endl;
 }
 void test_vertex_gen(){
     HexagonGrid hexagonGrid(2);
@@ -145,18 +153,22 @@ void test_vertex_gen(){
     printVertVect(vect);
     std::cout << vect.size() << std::endl;
 }
+void test_edge_gen(){
+    HexagonGrid hexagonGrid(2);
+    std::vector<Edge> vect = hexagonGrid.getPointyTopEdgeOrder(2);
+    printEdgeVect(vect);
+    std::cout << vect.size() << std::endl;
+}
 
-
+void test_game_state(){
+    
+}
 void test_all(){
-    test_hex_equals();
-    test_hex_directions();
-    test_hex_math();
-    test_hex_neighbour();
-    test_hex_length();
-    test_edge_equals();
-    test_vertex_equals();
-    test_hexagon_gen();
-    test_vertex_gen();
+    HexagonGrid hexGrid{2};
+    Board board{hexGrid};
+    std::vector<Player> players;
+    GameState gameState{board, players};
+    TextDisplay{gameState};
 }
 
 /*

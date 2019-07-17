@@ -38,6 +38,8 @@ class HexagonGrid{
         Tile& getTile(Hexagon hex);
         Road& getRoad(Edge edge);
         Settlement& getSettlement(Vertex vertex);
+        bool emptyEdge(Edge edge);
+        bool emptyVertex(Vertex vert);
         void addTile(Hexagon hex, Tile tile);
         void addRoad(Edge edge, Road road);
         void addSettlement(Vertex vertex, Settlement settlement);
