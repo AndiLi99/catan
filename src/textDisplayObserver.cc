@@ -7,15 +7,16 @@
 
 using namespace std;
 
-TextDisplay::TextDisplay(GameState& gameState): gameState{gameState}{
-    gameState.attach(this);
-    hexPrintOrder = gameState.getHexPrintOrder();
-    edgePrintOrder = gameState.getEdgePrintOrder();
-    vertexPrintOrder = gameState.getVertexPrintOrder();
+TextDisplay::TextDisplay(GameState* gameState): gameState{gameState}{
+	cout << "attaching to gamestate" << endl;
+    gameState->attach(this);
+    hexPrintOrder = gameState->getHexPrintOrder();
+    edgePrintOrder = gameState->getEdgePrintOrder();
+    vertexPrintOrder = gameState->getVertexPrintOrder();
 }
 
 char TextDisplay::getTileType(Hexagon hex){
-    const Tile& tile = gameState.cgetTile(hex);
+    const Tile& tile = gameState->cgetTile(hex);
     switch(tile.getType()){
         case TileType::Desert: return 'D';
         case TileType::Hills: return 'B';
@@ -26,7 +27,7 @@ char TextDisplay::getTileType(Hexagon hex){
     }
 }
 string TextDisplay::getTileNum(Hexagon hex){
-    const Tile& tile = gameState.cgetTile(hex);
+    const Tile& tile = gameState->cgetTile(hex);
     if (tile.getRollNumber() > 0){
         return std::to_string(tile.getRollNumber());
     } else {
@@ -35,19 +36,19 @@ string TextDisplay::getTileNum(Hexagon hex){
 }
 
 char TextDisplay::getRoad(Edge edge){
-    if (gameState.emptyEdge(edge)){
+    if (gameState->emptyEdge(edge)){
         return ' ';
     } else {
-        const Road& road = gameState.cgetRoad(edge);
+        const Road& road = gameState->cgetRoad(edge);
         return '0' + road.ownedBy();
     }
 }
 
 string TextDisplay::getSettlement(Vertex vert){
-    if (gameState.emptyVertex(vert)){
+    if (gameState->emptyVertex(vert)){
         return "   ";
     } else {
-        const Settlement& settlement = gameState.cgetSettlement(vert);
+        const Settlement& settlement = gameState->cgetSettlement(vert);
         if (settlement.isCity()){
             return "[" + std::to_string(settlement.ownedBy()) + "]";
         } else {
@@ -88,50 +89,17 @@ vector<char> TextDisplay::getRoads(){
 	return ret;
 }
 
-TextDisplay::~TextDisplay(){}
-
-void TextDisplay::notify(){}
-
-vector<int> numberGen(){
-	vector<int> placeHolder;
-	for (int i = 0; i < 19; i++){
-		placeHolder.push_back(i);
-	}
-
-	return placeHolder;
+TextDisplay::~TextDisplay(){
+	gameState->detach(this);
 }
 
-vector<char> charGen(){
-	vector <char> placeHolder;
-	for (int i = 0; i<19; i++){
-		placeHolder.push_back('B');
-	}
-	return placeHolder;
+void TextDisplay::printGame(){
+	printCoordBoard();
+	printBoard();
 }
-//prints out reference board with fixed co-ordinates and legend for players to use
-
-vector<string> vertexGen(){
-	vector <string> placeHolder;
-	for (int i = 0; i < 54; i++){
-		if (1){
-			string temp = "(*)";
-			placeHolder.push_back(temp);
-		}
-		else{
-			string temp = "[*]";
-			placeHolder.push_back(temp);
-		}
-	}
-	return placeHolder;
-
-}
-
-vector<char> roadGen(){
-	vector<char> placeHolder;
-	for (int i = 0; i < 72; i++){
-		placeHolder.push_back('*');
-	}
-	return placeHolder;
+void TextDisplay::notify(){
+	cout << "get notified" << endl;
+	printGame();
 }
 
 void TextDisplay::printCoordBoard(){

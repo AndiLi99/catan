@@ -9,7 +9,7 @@
 class GameState;
 
 class TextDisplay: public Observer {
-	GameState& gameState;
+	GameState* gameState;
 
 	std::vector<Hexagon> hexPrintOrder;
 	std::vector<Edge> edgePrintOrder;
@@ -25,14 +25,14 @@ class TextDisplay: public Observer {
 	std::vector<char> getRoads();
 	std::vector<std::string> getSettlements();
 	void printPlayers();
-	void printBoard();
 	void printCoordBoard();
 	void printResources();
 	void printVictoryPoints();
 	void printWin();
 	void printGame();
+	void printBoard();
 public:
-	TextDisplay(GameState& gameState);
+	TextDisplay(GameState* gameState);
 	void notify() override;
 	~TextDisplay();
 };
