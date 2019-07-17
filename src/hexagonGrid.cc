@@ -14,8 +14,6 @@ HexagonGrid::HexagonGrid(int radius): radius{radius}{
         std::vector<Vertex> vertices = hex.corners();
         validVertices.insert(vertices.begin(), vertices.end());
     }
-    std::cout << "number of valid edges" << validEdges.size() << std::endl;
-
 }
 
 std::vector<Hexagon> HexagonGrid::getPointyTopHexOrder(int radius){
@@ -48,7 +46,6 @@ std::vector<Vertex> HexagonGrid::getPointyTopVertexOrder(int radius){
     bool up = true;
     Corner c = Corner::L;
     do {
-        std::cout << width << std::endl;
         switch (c){
             case Corner::L:
                 for (int i = 0; i < width; ++i){
@@ -97,7 +94,6 @@ std::vector<Edge> HexagonGrid::getPointyTopEdgeOrder(int radius){
     bool up = true;
     bool vertical_road = false;
     do {
-        std::cout << width << std::endl;
         if (vertical_road)
         {
             for (int i = 0; i < width; ++i){
