@@ -30,6 +30,10 @@ class HexagonGrid{
         TileMap tiles;
         RoadMap roads;
         SettlementMap settlements;
+        int radius;
+        std::vector<Hexagon> getPointyTopHexOrder(int radius);
+        std::vector<Edge> getPointyTopEdgeOrder(int radius);
+        std::vector<Vertex> getPointyTopVertexOrder(int radius);
     public:
         HexagonGrid(int radius);
         const Tile& cgetTile(Hexagon hex);
@@ -43,8 +47,8 @@ class HexagonGrid{
         void addTile(Hexagon hex, Tile tile);
         void addRoad(Edge edge, Road road);
         void addSettlement(Vertex vertex, Settlement settlement);
-        std::vector<Hexagon> getPointyTopHexOrder(int radius);
-        std::vector<Edge> getPointyTopEdgeOrder(int radius);
-        std::vector<Vertex> getPointyTopVertexOrder(int radius);
+        std::vector<Hexagon> getHexPrintOrder();
+        std::vector<Edge> getEdgePrintOrder();
+        std::vector<Vertex> getVertexPrintOrder();
 };
 #endif

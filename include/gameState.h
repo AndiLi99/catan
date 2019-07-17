@@ -24,9 +24,9 @@ class GameState: public Subject{
         void rollDice();
         void endTurn();
         const HexagonGrid& getGrid();
-        vector<Hexagon> getHexPrintOrder();
-        vector<Edge> getEdgePrintOrder();
-        vector<Vertex> getVertexPrintOrder();
+        std::vector<Hexagon> getHexPrintOrder();
+        std::vector<Edge> getEdgePrintOrder();
+        std::vector<Vertex> getVertexPrintOrder();
         const Tile& cgetTile(Hexagon hex);
         const Road& cgetRoad(Edge edge);
         const Settlement& cgetSettlement(Vertex vertex);

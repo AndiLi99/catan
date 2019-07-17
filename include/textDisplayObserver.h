@@ -11,19 +11,19 @@ class GameState;
 class TextDisplay: public Observer {
 	GameState& gameState;
 
-	vector<Hexagon> hexPrintOrder;
-	vector<Edge> edgePrintOrder;
-	vector<Vertex> vertexPrintOrder;
+	std::vector<Hexagon> hexPrintOrder;
+	std::vector<Edge> edgePrintOrder;
+	std::vector<Vertex> vertexPrintOrder;
 
 	std::string getTileNum(Hexagon hex);
 	char getTileType(Hexagon hex);
 	char getRoad(Edge road);
-	string getSettlement(Vertex vert);
+	std::string getSettlement(Vertex vert);
 
-	vector<std::string> getTileNums();
-	vector<char> getTileTypes();
-	vector<char> getRoads();
-	vector<string> getSettlements();
+	std::vector<std::string> getTileNums();
+	std::vector<char> getTileTypes();
+	std::vector<char> getRoads();
+	std::vector<std::string> getSettlements();
 	void printPlayers();
 	void printBoard();
 	void printCoordBoard();

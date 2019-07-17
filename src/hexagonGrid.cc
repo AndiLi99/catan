@@ -2,7 +2,7 @@
 #include <vector>
 #include <queue>
 
-HexagonGrid::HexagonGrid(int radius){
+HexagonGrid::HexagonGrid(int radius): radius{radius}{
     std::vector<Hexagon> hexes = getPointyTopHexOrder(radius);
     validHexagons.insert(hexes.begin(), hexes.end());
 
@@ -121,4 +121,49 @@ std::vector<Edge> HexagonGrid::getPointyTopEdgeOrder(int radius){
         } 
     } while(!(width == 3 && vertical_road));
     return ret;
+}
+
+std::vector<Hexagon> HexagonGrid::getHexPrintOrder(){
+    return getPointyTopHexOrder(radius);
+}
+std::vector<Edge> HexagonGrid::getEdgePrintOrder(){
+    return getPointyTopEdgeOrder(radius);
+}
+std::vector<Vertex> HexagonGrid::getVertexPrintOrder(){
+    return getPointyTopVertexOrder(radius);
+}
+
+const Tile& HexagonGrid::cgetTile(Hexagon hex){
+    return getTile(hex);
+}
+const Road& HexagonGrid::cgetRoad(Edge edge){
+    return getRoad(edge);
+}
+const Settlement& HexagonGrid::cgetSettlement(Vertex vertex){
+    return getSettlement(vertex);
+}
+Tile& HexagonGrid::getTile(Hexagon hex){
+    return tiles.at(hex);
+}
+Road& HexagonGrid::getRoad(Edge edge){
+    return roads.at(edge);
+}
+Settlement& HexagonGrid::getSettlement(Vertex vertex){
+    return settlements.at(vertex);
+}
+bool HexagonGrid::emptyEdge(Edge edge){
+    return roads.find(edge) == roads.end();
+}
+bool HexagonGrid::emptyVertex(Vertex vert){
+    return settlements.find(vert) == settlements.end();
+}
+
+void HexagonGrid::addTile(Hexagon hex, Tile tile){
+    tiles.insert_or_assign(hex, tile);
+}
+void HexagonGrid::addRoad(Edge edge, Road road){
+    roads.insert_or_assign(edge, road);
+}
+void HexagonGrid::addSettlement(Vertex vertex, Settlement settlement){
+    settlements.insert_or_assign(vertex, settlement);
 }

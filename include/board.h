@@ -21,5 +21,14 @@ class Board {
 		std::vector<int> moveRobber(Hexagon location);
 		const HexagonGrid& getGrid();
 		Hexagon getRobber();
+
+		std::vector<Hexagon> getHexPrintOrder();
+        std::vector<Edge> getEdgePrintOrder();
+        std::vector<Vertex> getVertexPrintOrder();
+		const Tile& cgetTile(Hexagon hex);
+        const Road& cgetRoad(Edge edge);
+        const Settlement& cgetSettlement(Vertex vertex);
+        bool emptyEdge(Edge edge);
+        bool emptyVertex(Vertex vert);
 };
 #endif
