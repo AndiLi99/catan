@@ -69,6 +69,8 @@ std::vector<std::vector<int>> Board::produceResources(int roll, int numPlayers){
                         break;
                         case TileType::Mountains: ret[index][4] += prodRate;
                         break;
+                        case TileType::Desert: break;
+
                     }
                 }
             }
@@ -116,9 +118,11 @@ std::vector<int> Board::adjacentResources(Vertex vert){
                 case TileType::Fields: ++ret[2]; break;
                 case TileType::Pasture: ++ret[3]; break;
                 case TileType::Mountains: ++ret[4]; break;
+                case TileType::Desert: break;
             }
         }
     }
+    return ret;
 }
 bool Board::adjacentVerticesEmpty(Vertex vert){
     for (Vertex others: vert.adjacent()){

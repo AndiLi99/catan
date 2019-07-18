@@ -41,6 +41,7 @@ Resource Player::stealResource(){
 		} 
 	}
 	subResource(resource);
+	return resource;
 }
 void Player::addResource(Resource resource){
 	++resources[resource];

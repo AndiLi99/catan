@@ -216,6 +216,7 @@ std::vector<Edge> HexagonGrid::adjacentEmptyRoads(int playerID){
             }
         }
     }
+    return ret;
 }
 std::vector<Vertex> HexagonGrid::adjacentEmptySettlements(int playerID){
     std::vector<Vertex> ret;
@@ -247,4 +248,5 @@ std::vector<Vertex> HexagonGrid::adjacentEmptySettlements(int playerID){
             }
         }
     }
+    return ret;
 }

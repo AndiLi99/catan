@@ -113,7 +113,7 @@ void GameState::moveRobber(Hexagon hex){
         canMoveRobber = false;
     }
 }
-Resource GameState::stealResource(int playerID){
+void GameState::stealResource(int playerID){
     if (std::find(stealablePlayers.begin(), stealablePlayers.end(), playerID) !=
     stealablePlayers.end()){
         if (getPlayer(playerID).handSize() > 0){
@@ -144,7 +144,6 @@ void GameState::rollDice(){
             if (lastRoll == 7){
                 canMoveRobber = true;
             } else {
-                getTurnPlayer().addResources({std::vector<int>{1,1,1,1,1}});
                 std::vector<std::vector<int>> production = board.produceResources(lastRoll, numPlayers);
                 for (int i=0;i<numPlayers;++i){
                     players[i].addResources(production[i]);
@@ -195,6 +194,8 @@ void GameState::endTurn(){
             {
                 if (setupIDHold)
                 {
+                    getTurnPlayer().addSettlement();
+                    getTurnPlayer().addRoad();
                     setupIDHold = false;
                 }
                 else 
@@ -206,8 +207,9 @@ void GameState::endTurn(){
 
             if (turnPlayer == numPlayers){
                 setupIDGoingUp = false;
-            } else if(turnPlayer == 1 && !setupIDGoingUp){
+            } else if(turnPlayer == 0 && !setupIDGoingUp){
                 gamePhase = GamePhase::Play;
+                turnPlayer = 1;
             }
         } 
         else if (gamePhase == GamePhase::Play)

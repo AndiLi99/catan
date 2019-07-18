@@ -1,6 +1,10 @@
 #include <vector>
+#include "resource.h"
 
-struct resourceArray{
-    int playerID;
-    std::vector<int> resources;
+class ResourceArray{
+        std::vector<int> resources;
+    public:
+        ResourceArray(int lumber, int brick, int grain, int sheep, int ore);
+        std::vector<int> get();
+        void addResource(Resource res, int num);
 };

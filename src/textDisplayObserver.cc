@@ -8,7 +8,6 @@
 using namespace std;
 
 TextDisplay::TextDisplay(GameState* gameState): gameState{gameState}{
-	cout << "attaching to gamestate" << endl;
     gameState->attach(this);
     hexPrintOrder = gameState->getHexPrintOrder();
     edgePrintOrder = gameState->getEdgePrintOrder();
@@ -21,10 +20,11 @@ char TextDisplay::getTileType(Hexagon hex){
         case TileType::Desert: return 'D';
         case TileType::Hills: return 'B';
         case TileType::Fields: return 'G';
-        case TileType::Pasture: return 'S';
+        case TileType::Pasture: return 'W';
         case TileType::Mountains: return 'O';
         case TileType::Forest: return 'L';
     }
+	return ' ';
 }
 string TextDisplay::getTileNum(Hexagon hex){
     const Tile& tile = gameState->cgetTile(hex);

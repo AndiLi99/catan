@@ -40,7 +40,7 @@ class GameState: public Subject{
         void purchaseSettlement();
         void purchaseCity();
         void purchaseRoad();
-        Resource stealResource(int playerID);
+        void stealResource(int playerID);
         void rollDice();
         void endTurn();
         void moveRobber(Hexagon hex);

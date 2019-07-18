@@ -22,7 +22,9 @@ vector <string> CommandParser::splitString(string str, char delim){
 }
 
 //constructor
-CommandParser::CommandParser(GameState* gameState):gameState{gameState}{}
+CommandParser::CommandParser(GameState* gameState):gameState{gameState}{
+	gameState->notifyObservers();
+}
 
 //destructor
 CommandParser::~CommandParser(){}
