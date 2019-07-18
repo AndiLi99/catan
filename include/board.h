@@ -19,7 +19,7 @@ class Board {
 		std::vector<Edge> getRoads(int playerID);
 		std::vector<Vertex> getSettlements(int playerID);
 		std::vector<int> moveRobber(Hexagon location);
-		Hexagon getRobber();
+		std::optional<Hexagon> getRobber();
 
 		std::vector<Hexagon> getHexPrintOrder();
         std::vector<Edge> getEdgePrintOrder();

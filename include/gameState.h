@@ -19,6 +19,7 @@ class GameState: public Subject{
         int lastRoll;
         std::vector<int> stealablePlayers;
         bool rolled;
+        bool canMoveRobber;
         int indexFromPlayerID(int);
         Player& getPlayer(int playerID);
         Player& getTurnPlayer();
@@ -48,6 +49,7 @@ class GameState: public Subject{
         const Tile& cgetTile(Hexagon hex);
         const Road& cgetRoad(Edge edge);
         const Settlement& cgetSettlement(Vertex vertex);
+        std::optional<Hexagon> getRobber();
         bool emptyEdge(Edge edge);
         bool emptyVertex(Vertex vert);
 };

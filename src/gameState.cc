@@ -5,6 +5,8 @@ GameState::GameState(Board board, std::vector<Player> players, DiceRoll dice):
 board{board}, players{players}, numPlayers{players.size()}, dice{dice}{
     turnPlayer = 1;
     rolled = false;
+    canMoveRobber = false;
+    lastRoll = 0;
 }
 GameState::~GameState(){}
 
@@ -59,7 +61,10 @@ void GameState::purchaseRoad(){
 }
 
 void GameState::moveRobber(Hexagon hex){
-    stealablePlayers = board.moveRobber(hex);
+    if (canMoveRobber){
+        stealablePlayers = board.moveRobber(hex);
+        canMoveRobber = false;
+    }
 }
 Resource GameState::stealResource(int playerID){
     if (std::find(stealablePlayers.begin(), stealablePlayers.end(), playerID) !=
@@ -87,12 +92,16 @@ std::string GameState::getUsername(){
 void GameState::rollDice(){
     if (!rolled){
         lastRoll = dice.rollDice();
-        getTurnPlayer().addResources({std::vector<int>{1,1,1,1,1}});
-        std::vector<std::vector<int>> production = board.produceResources(lastRoll, numPlayers);
-        for (int i=0;i<numPlayers;++i){
-            players[i].addResources(production[i]);
-        }
         rolled = true;
+        if (lastRoll == 7){
+            canMoveRobber = true;
+        } else {
+            getTurnPlayer().addResources({std::vector<int>{1,1,1,1,1}});
+            std::vector<std::vector<int>> production = board.produceResources(lastRoll, numPlayers);
+            for (int i=0;i<numPlayers;++i){
+                players[i].addResources(production[i]);
+            }
+        }
     }
 }
 
@@ -109,7 +118,9 @@ bool GameState::canEndTurn(){
     return !(player.canBuildCity() ||
             player.canBuildRoad() ||
             player.canBuildSettlement())
-            && rolled;
+            && rolled
+            && !canMoveRobber
+            && !stealablePlayers.size();
 }
 void GameState::endTurn(){
     if (canEndTurn()){
@@ -144,4 +155,7 @@ bool GameState::emptyEdge(Edge edge){
 }
 bool GameState::emptyVertex(Vertex vert){
     return board.emptyVertex(vert);
+}
+std::optional<Hexagon> GameState::getRobber(){
+    return board.getRobber();
 }

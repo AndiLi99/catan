@@ -58,9 +58,17 @@ string TextDisplay::getSettlement(Vertex vert){
 }
 
 vector<char> TextDisplay::getTileTypes(){
+	std::optional<Hexagon> robber = gameState->getRobber();
 	vector<char> ret;
 	for (Hexagon hex: hexPrintOrder){
-		ret.push_back(getTileType(hex));
+		if (robber == hex)
+		{
+			ret.push_back('R');
+		} 
+		else 
+		{
+			ret.push_back(getTileType(hex));
+		}
 	}
 	return ret;
 }

@@ -84,3 +84,7 @@ std::vector<int> Board::moveRobber(Hexagon hex){
     }
     return ret;
 }
+
+std::optional<Hexagon> Board::getRobber(){
+    return robber;
+}
