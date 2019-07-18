@@ -120,6 +120,7 @@ void GameState::stealResource(int playerID){
             Resource stolen = getPlayer(playerID).stealResource();
             getTurnPlayer().addResource(stolen);
         }
+        stealablePlayers.clear();
     }
 }
 

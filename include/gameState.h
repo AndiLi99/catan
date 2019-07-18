@@ -27,13 +27,13 @@ class GameState: public Subject{
         bool canEndTurn();
         GamePhase gamePhase;
         void startSetupPhase();
-        bool validSettlement(Vertex vertex);
-        bool validRoad(Edge edge);
         bool setupIDHold;
         std::optional<Vertex> pregameLastSettle;
     public:
         GameState(Board board, std::vector<Player> players, DiceRoll dice);
         ~GameState();
+        bool validSettlement(Vertex vertex);
+        bool validRoad(Edge edge);
         void buildSettlement(Vertex vertex);
         void buildCity(Vertex vertex);
         void buildRoad(Edge edge);

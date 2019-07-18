@@ -133,13 +133,24 @@ void CommandParser::commandDirections(vector <string> input){
 	enum Options{W = 1, N = 2, E = 3, L = 4, R = 5};
 	switch(ConvertToDirections(input[4])){
 		case W:cout<<printInput(input)<<endl;
-				cout << "Boom shakalaka" << endl;
+				if (!gameState->validRoad(Edge{a, b, Side::W})){
+					cout <<"Error: b r coordinate values not valid"<<endl;
+					break;
+				}
 		 		gameState->buildRoad(Edge{a, b, Side::W});
 				break;
 		case N:cout<<printInput(input)<<endl;
+				if (!gameState->validRoad(Edge{a, b, Side::N})){
+					cout <<"Error: b r coordinate values not valid"<<endl;
+					break;
+				}
 		 		gameState->buildRoad(Edge{a, b, Side::N});
 			   break;
 		case E:cout<<printInput(input)<<endl;
+				if (!gameState->validRoad(Edge{a, b, Side::E})){
+					cout <<"Error: b r coordinate values not valid"<<endl;
+					break;
+				}
 		 		gameState->buildRoad(Edge{a, b, Side::E});
 			   break;
 		default:
@@ -156,25 +167,33 @@ void CommandParser::commandLR(vector <string> input, string typeOfSettlement){
 		enum Options{L = 4, R = 5};
 	switch(ConvertToDirections(input[4])){
 		case R:
-			   if(typeOfSettlement == "city"){
-				   cout<<printInput(input)<<" city"<<endl;
-				   gameState->buildCity(Vertex{a, b, Corner::R});
-				   }
-			   else{
-				   cout<<printInput(input)<<" settlement"<<endl;
-				   gameState->buildSettlement(Vertex{a, b, Corner::R});
-				   }
-				break;
+				if (!gameState->validSettlement(Vertex{a, b, Corner::R})){
+					cout <<"Error: b r coordinate values not valid"<<endl;
+					break;
+				}
+				if(typeOfSettlement == "city"){
+					cout<<printInput(input)<<" city"<<endl;
+					gameState->buildCity(Vertex{a, b, Corner::R});
+					}
+				else{
+					cout<<printInput(input)<<" settlement"<<endl;
+					gameState->buildSettlement(Vertex{a, b, Corner::R});
+					}
+					break;
 		case L:
-			   if(typeOfSettlement == "city"){
-				   cout<<printInput(input)<<" city"<<endl;
-				   gameState->buildCity(Vertex{a, b, Corner::L});
-				   }
-			   else{
-				   cout<<printInput(input)<<" settlement"<<endl;
-				   gameState->buildSettlement(Vertex{a, b, Corner::L});
-				   }
-				break;
+				if (!gameState->validSettlement(Vertex{a, b, Corner::L})){
+					cout <<"Error: b r coordinate values not valid"<<endl;
+					break;
+				}
+				if(typeOfSettlement == "city"){
+					cout<<printInput(input)<<" city"<<endl;
+					gameState->buildCity(Vertex{a, b, Corner::L});
+					}
+				else{
+					cout<<printInput(input)<<" settlement"<<endl;
+					gameState->buildSettlement(Vertex{a, b, Corner::L});
+					}
+					break;
 		default:
 				cout << "Error: b s/c Command, Direction not Valid"<<endl;
 				break;
@@ -185,28 +204,15 @@ void CommandParser::commandLR(vector <string> input, string typeOfSettlement){
 //second switch statement for options relating to b command (b /r/s/c a b /W/N/E/L/R)
 void CommandParser::commandB(vector <string> input){
 	enum Options{r = 1, s = 2, c = 3};
-	int a;
-	int b;
-	a = convertToInt(input[2]);
-	b = convertToInt(input[3]);
 	switch(commandBOptions(input[1])){
 		case r:
-				if (isValidCoord(a) && isValidCoord(b)){
-						commandDirections(input);//call specified gamestate function
-				}
-				else{cout <<"Error: b r coordinate values not valid"<<endl;}
+				commandDirections(input);//call specified gamestate function
 				break;
 		case s: 
-				if (isValidCoord(a) && isValidCoord(b)){
-						commandLR(input, "settlement");//call specified gamestate function
-				}
-				else{cout <<"Error: b s coordinate values not valid"<<endl;}
+				commandLR(input, "settlement");//call specified gamestate function
 				break;
 		case c:
-				if (isValidCoord(a) && isValidCoord(b)){
-						commandLR(input, "city");//call specified gamestate function
-				}
-				else{cout <<"Error: b r coordinate values not valid"<<endl;}
+				commandLR(input, "city");//call specified gamestate function
 				break;
 		default:cout<<"Error:not valid b * command"<<endl;
 				break;

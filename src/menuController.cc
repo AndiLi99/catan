@@ -26,6 +26,9 @@ void MenuController::randomNew(std::vector<std::string> usernames){
 
     std::string input;
     while (std::getline(std::cin,input)){
+        if (input == "q"){
+            break;
+        }
         commandParser.parse(input);
     }
 }
@@ -45,6 +48,9 @@ void MenuController::defaultNew(std::vector<std::string> usernames){
 
     std::string input;
     while (std::getline(std::cin,input)){
+        if (input == "q"){
+            break;
+        }
         commandParser.parse(input);
     }
 }
