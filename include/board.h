@@ -9,7 +9,6 @@ struct ResourceArray;
 class Board {
 		HexagonGrid hexGrid;
 		std::optional<Hexagon> robber;
-		std::vector<Hexagon> hexagonsWithNumber(int roll);
 	public:
 		Board(HexagonGrid hexGrid);
 		void addSettlement(Vertex vertex, int playerID);
@@ -20,6 +19,9 @@ class Board {
 		std::vector<Vertex> getSettlements(int playerID);
 		std::vector<int> moveRobber(Hexagon location);
 		std::optional<Hexagon> getRobber();
+		std::vector<Edge> adjacentEmptyRoads(int playerID);
+		std::vector<Vertex> adjacentEmptySettlements(int playerID);
+		std::vector<int> adjacentResources(Vertex vert);
 
 		std::vector<Hexagon> getHexPrintOrder();
         std::vector<Edge> getEdgePrintOrder();
@@ -29,5 +31,8 @@ class Board {
         const Settlement& cgetSettlement(Vertex vertex);
         bool emptyEdge(Edge edge);
         bool emptyVertex(Vertex vert);
+        bool emptyHexagon(Hexagon hexagon);
+		bool adjacentVerticesEmpty(Vertex vert);
+		bool canUpgrade(Vertex vertex, int playerID);
 };
 #endif

@@ -9,6 +9,9 @@ Player::Player(string username):resources{vector{0,0,0,0,0}}, username{username}
 	purchasedSettlements = 0;
 	purchasedRoads = 0;
 	victoryPoints = 0;
+	roadsLeft = 15;
+	citiesLeft = 4;
+	settlementsLeft = 5;
 }
 
 //destructor
@@ -86,14 +89,18 @@ string Player::getUsername(){
 
 void Player::addRoad(){
 	++purchasedRoads;
+	--roadsLeft;
 }
 
 void Player::addSettlement(){
 	++purchasedSettlements;
+	--settlementsLeft;
 }
 
 void Player::addCity(){
 	++purchasedCities;
+	--citiesLeft;
+	++settlementsLeft;
 }
 void Player::subtractRoad(){
 	--purchasedRoads;
@@ -108,13 +115,13 @@ void Player::subtractCity(){
 }
 
 bool Player::canPurchaseRoad(){
-	return hasAtLeast(Road::cost);
+	return hasAtLeast(Road::cost) && roadsLeft > 0;
 }
 bool Player::canPurchaseSettlement(){
-	return hasAtLeast(Settlement::cost);
+	return hasAtLeast(Settlement::cost) && settlementsLeft > 0;
 }
 bool Player::canPurchaseCity(){
-	return hasAtLeast(Settlement::upgradeCost);
+	return hasAtLeast(Settlement::upgradeCost) && citiesLeft > 0;
 }
 bool Player::canBuildRoad(){
 	return purchasedRoads > 0;

@@ -47,6 +47,7 @@ class HexagonGrid{
         Settlement& getSettlement(Vertex vertex);
         bool emptyEdge(Edge edge);
         bool emptyVertex(Vertex vert);
+        bool emptyHexagon(Hexagon hex);
         void addTile(Hexagon hex, Tile tile);
         void addRoad(Edge edge, Road road);
         void addSettlement(Vertex vertex, Settlement settlement);
@@ -54,5 +55,9 @@ class HexagonGrid{
         std::vector<Hexagon> getHexPrintOrder();
         std::vector<Edge> getEdgePrintOrder();
         std::vector<Vertex> getVertexPrintOrder();
+        std::vector<Edge> getRoads(int playerID);
+		std::vector<Vertex> getSettlements(int playerID);
+        std::vector<Edge> adjacentEmptyRoads(int playerID);
+		std::vector<Vertex> adjacentEmptySettlements(int playerID);
 };
 #endif

@@ -8,6 +8,7 @@
 #include "hexagonGridBuilder.h"
 #include "commandParser.h"
 #include "defaultGridBuilder.h"
+#include "randomGridBuilder.h"
 
 void complain(const char* name){
     std::cout << "Test failed: " << name << std::endl;
@@ -168,7 +169,8 @@ void test_edge_gen(){
 
 void test_game_state(){
     DefaultGridBuilder defBuilder;
-    HexagonGrid hexGrid = defBuilder.build();
+    RandomGridBuilder randomBuilder;
+    HexagonGrid hexGrid = randomBuilder.build();
     Board board{hexGrid};
     std::vector<Player> players{Player{"Andi"}, Player{"Gracie"}};
     DiceRoll dice;

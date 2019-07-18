@@ -39,6 +39,9 @@ bool Board::emptyEdge(Edge edge){
 bool Board::emptyVertex(Vertex vert){
     return hexGrid.emptyVertex(vert);
 }
+bool Board::emptyHexagon(Hexagon hex){
+    return hexGrid.emptyHexagon(hex);
+}
 
 std::vector<std::vector<int>> Board::produceResources(int roll, int numPlayers){
     std::vector<std::vector<int>> ret;
@@ -87,4 +90,45 @@ std::vector<int> Board::moveRobber(Hexagon hex){
 
 std::optional<Hexagon> Board::getRobber(){
     return robber;
+}
+
+std::vector<Edge> Board::adjacentEmptyRoads(int playerID){
+    return hexGrid.adjacentEmptyRoads(playerID);
+}
+std::vector<Vertex> Board::adjacentEmptySettlements(int playerID){
+    return hexGrid.adjacentEmptySettlements(playerID);
+}
+
+std::vector<Edge> Board::getRoads(int playerID){
+    return hexGrid.getRoads(playerID);
+}
+std::vector<Vertex> Board::getSettlements(int playerID){
+    return hexGrid.getSettlements(playerID);
+}
+std::vector<int> Board::adjacentResources(Vertex vert){
+    std::vector<int> ret{0,0,0,0,0};
+    for (Hexagon hex: vert.touches()){
+        if (!emptyHexagon(hex)){
+            const Tile& tile = cgetTile(hex);
+            switch(tile.getType()){
+                case TileType::Forest: ++ret[0]; break;
+                case TileType::Hills: ++ret[1]; break;
+                case TileType::Fields: ++ret[2]; break;
+                case TileType::Pasture: ++ret[3]; break;
+                case TileType::Mountains: ++ret[4]; break;
+            }
+        }
+    }
+}
+bool Board::adjacentVerticesEmpty(Vertex vert){
+    for (Vertex others: vert.adjacent()){
+        if (!emptyVertex(others)) return false;
+    }
+    return true;
+}
+bool Board::canUpgrade(Vertex vertex, int playerID){
+    return (!emptyVertex(vertex) && 
+    cgetSettlement(vertex).ownedBy() == playerID &&
+    !cgetSettlement(vertex).isCity()
+    );
 }

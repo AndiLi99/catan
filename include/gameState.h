@@ -20,10 +20,17 @@ class GameState: public Subject{
         std::vector<int> stealablePlayers;
         bool rolled;
         bool canMoveRobber;
+        bool setupIDGoingUp;
         int indexFromPlayerID(int);
         Player& getPlayer(int playerID);
         Player& getTurnPlayer();
         bool canEndTurn();
+        GamePhase gamePhase;
+        void startSetupPhase();
+        bool validSettlement(Vertex vertex);
+        bool validRoad(Edge edge);
+        bool setupIDHold;
+        std::optional<Vertex> pregameLastSettle;
     public:
         GameState(Board board, std::vector<Player> players, DiceRoll dice);
         ~GameState();

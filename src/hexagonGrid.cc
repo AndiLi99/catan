@@ -153,6 +153,9 @@ bool HexagonGrid::emptyEdge(Edge edge){
 bool HexagonGrid::emptyVertex(Vertex vert){
     return settlements.find(vert) == settlements.end();
 }
+bool HexagonGrid::emptyHexagon(Hexagon hex){
+    return tiles.find(hex) == tiles.end();
+}
 
 void HexagonGrid::addTile(Hexagon hex, Tile tile){
     tiles.insert_or_assign(hex, tile);
@@ -166,5 +169,82 @@ void HexagonGrid::addSettlement(Vertex vertex, Settlement settlement){
 void HexagonGrid::upgradeSettlement(Vertex vertex){
     if (!emptyVertex(vertex)){
         settlements.at(vertex).upgradeToCity();
+    }
+}
+std::vector<Edge> HexagonGrid::getRoads(int playerID){
+    std::vector<Edge> ret;
+    for (auto pair: roads){
+        if (pair.second.ownedBy() == playerID) ret.push_back(pair.first);
+    }
+    return ret;
+}
+std::vector<Vertex> HexagonGrid::getSettlements(int playerID){
+    std::vector<Vertex> ret;
+    for (auto pair: settlements){
+        if (pair.second.ownedBy() == playerID) ret.push_back(pair.first);
+    }
+    return ret;
+}
+
+std::vector<Edge> HexagonGrid::adjacentEmptyRoads(int playerID){
+    std::vector<Edge> ret;
+    std::vector<Vertex> stack = getSettlements(playerID);
+    VertexSet visitedVertices;
+    EdgeSet visitedEdges;
+
+    while(stack.size()){
+        Vertex v = stack.back(); 
+        stack.pop_back();
+
+        if (visitedVertices.find(v) == visitedVertices.end()){
+            visitedVertices.insert(v);
+            if (emptyVertex(v) || cgetSettlement(v).ownedBy() == playerID){
+                for (Edge e: v.protrudes()){
+                    if (visitedEdges.find(e) == visitedEdges.end())
+                    {
+                        visitedEdges.insert(e);
+                        if (emptyEdge(e))
+                        {
+                            ret.push_back(e);
+                        }
+                        else if (cgetRoad(e).ownedBy() == playerID)
+                        {
+                            stack.insert(stack.end(), e.endpoints().begin(), e.endpoints().end());
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+std::vector<Vertex> HexagonGrid::adjacentEmptySettlements(int playerID){
+    std::vector<Vertex> ret;
+    std::vector<Vertex> stack = getSettlements(playerID);
+    VertexSet visitedVertices;
+    EdgeSet visitedEdges;
+
+    while(stack.size()){
+        Vertex v = stack.back(); 
+        stack.pop_back();
+
+        if (visitedVertices.find(v) == visitedVertices.end()){
+            visitedVertices.insert(v);
+            if (emptyVertex(v) || cgetSettlement(v).ownedBy() == playerID){
+                for (Edge e: v.protrudes()){
+                    if (visitedEdges.find(e) == visitedEdges.end())
+                    {
+                        visitedEdges.insert(e);
+                        if (cgetRoad(e).ownedBy() == playerID)
+                        {
+                            stack.insert(stack.end(), e.endpoints().begin(), e.endpoints().end());
+                        }
+                    }
+                }
+            }
+            if (emptyVertex(v))
+            {
+                ret.push_back(v);
+            }
+        }
     }
 }

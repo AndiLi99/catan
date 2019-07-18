@@ -16,6 +16,9 @@ class Player{
 	int purchasedRoads;
 	int purchasedSettlements;
 	int purchasedCities;
+	int roadsLeft;
+	int settlementsLeft;
+	int citiesLeft;
 public:
 	Player(std::string);
 	int getVictoryPoints();
