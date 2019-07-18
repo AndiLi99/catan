@@ -158,6 +158,15 @@ void TextDisplay::printCoordBoard(){
 	cout<<"        ( )     ( )     ( )     ( )"<<endl;
 	cout<<"          \\ \\ / / \\ \\ / / \\ \\ / /"<<endl;
 	cout<<"            ( )     ( )     ( )"<<endl;
+	cout<<endl;
+	cout<< "Coordinate System: "<<endl;
+	cout<< "      ( )"<<endl;
+	cout<< "  N / / \\ \\ E"<<endl;
+	cout<< "  ( )     (R)"<<endl;
+	cout<< "W | |     | |"<<endl;
+	cout<< "  (L)     ( )"<<endl;
+	cout<< "    \\ \\ / /"<<endl;
+	cout<< "      ( )"<<endl;
 	cout<< "=========================================="<<endl;
 }
 
