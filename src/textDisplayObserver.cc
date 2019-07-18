@@ -130,7 +130,6 @@ void TextDisplay::printGame(){
 	printLastDiceRoll();
 }
 void TextDisplay::notify(){
-	cout << "get notified" << endl;
 	printGame();
 }
 
