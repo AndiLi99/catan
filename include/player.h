@@ -12,36 +12,31 @@
 class Player{
 	int victoryPoints;//to keep track of how many victory points there are
 	std::vector <int> resources;//count to keep track of wood, sheep, stone, brick, wheat
-	//std::vector <DevCard> developmentCards;
-	
-	std::vector <Edge> roads;
-	std::vector <Vertex> settlements;
-	std::vector <Vertex> cities;
-
-	int knightsUsed;
-
 	std::string username;
 	int id;
-	bool isEnough(int);
-
-
+	int purchasedRoads;
+	int purchasedSettlements;
+	int purchasedCities;
 public:
 	Player(std::string);
-	void showVictoryPoints();
-	void addVictoryPoint(int);
-	void subtractVictoryPoint(int);
+	int getVictoryPoints();
+	void addVictoryPoints(int);
+	void subtractVictoryPoints(int);
 
-	void showResources();
-	void buildRoad(Edge);
-	void buildSettlement(Vertex);
-	void upgradeToCity(Vertex);
-	//void buyDevCard(developmentDeck&);
+	void addRoad();
+	void addSettlement();
+	void addCity();
+	void subtractRoad();
+	void subtractSettlement();
+	void subtractCity();
 
-	//void showDevCard();
-	//void useDevCard(int i);
+	void addResources(std::vector<int>);
+	void subtractResources(std::vector<int>);
+	bool hasAtLeast(std::vector<int>);
+	std::vector<int> getResources();
 
-	void addResource(int wood,int sheep,int stone,int brick ,int wheat);
-	void subtractResource(int wood,int sheep,int stone,int brick ,int wheat);
+	int handSize();
+	std::string getUsername();
 	~Player();
 };
 #endif
