@@ -22,7 +22,7 @@ vector <string> CommandParser::splitString(string str, char delim){
 }
 
 //constructor
-CommandParser::CommandParser(/*GameState & g*/)/*:g{g}*/{}
+CommandParser::CommandParser(GameState* gameState):gameState{gameState}{}
 
 //destructor
 CommandParser::~CommandParser(){}
@@ -36,6 +36,7 @@ int CommandParser::commandOptions(string commandWord){
 	if(commandWord == "r"){return 4;}
 	if(commandWord == "e"){return 5;}
 	if(commandWord == "t"){return 6;}
+	if(commandWord == "s"){return 7;}
 	return -1;
 }
 
@@ -54,13 +55,16 @@ void CommandParser::commandP(vector <string> input){
 	enum Options {r = 1, s = 2, c = 3, d = 4};
 	//p has already been validated, need to validate second character in command
 	switch(commandPtoOptions(input[1])){
-		case r:	cout<<printInput(input)<<endl;/*call gamstateFunction*/
+		case r:	cout<<printInput(input)<<endl;
+				gameState->purchaseRoad();
 				break;
-		case s:	cout<<printInput(input)<<endl;/*call gamstateFunction*/
+		case s:	cout<<printInput(input)<<endl;
+				gameState->purchaseSettlement();
 				break;
-		case c:	cout<<printInput(input)<<endl;/*call gamstateFunction*/
+		case c:	cout<<printInput(input)<<endl;
+				gameState->purchaseCity();
 				break;
-		case d:	cout<<printInput(input)<<endl;/*call gamstateFunction*/
+		case d:	cout<<printInput(input)<<endl;
 				break;
 		default:
 				cout << "p * command not valid" << endl;
@@ -121,16 +125,20 @@ string CommandParser::printInput(vector <string> input){
 
 //final call commands to Gamestate object for command b r
 void CommandParser::commandDirections(vector <string> input){
+	int a = convertToInt(input[2]);
+	int b = convertToInt(input[3]);
+	cout << "a: " << a << " b: " << b << endl;
 	enum Options{W = 1, N = 2, E = 3, L = 4, R = 5};
 	switch(ConvertToDirections(input[4])){
 		case W:cout<<printInput(input)<<endl;
-				//g.buyRoad();
-			   break;
+				cout << "Boom shakalaka" << endl;
+		 		gameState->buildRoad(Edge{a, b, Side::W});
+				break;
 		case N:cout<<printInput(input)<<endl;
-				//g.buyRoad();
+		 		gameState->buildRoad(Edge{a, b, Side::N});
 			   break;
 		case E:cout<<printInput(input)<<endl;
-				//g.buyRoad();
+		 		gameState->buildRoad(Edge{a, b, Side::E});
 			   break;
 		default:
 				cout << "Error: b r Command, Direction not Valid"<<endl;
@@ -141,15 +149,30 @@ void CommandParser::commandDirections(vector <string> input){
 
 //final call commands to Gamestate object for command b s
 void CommandParser::commandLR(vector <string> input, string typeOfSettlement){
+	int a = convertToInt(input[2]);
+	int b = convertToInt(input[3]);
 		enum Options{L = 4, R = 5};
 	switch(ConvertToDirections(input[4])){
 		case R:
-			   if(typeOfSettlement == "city"){cout<<printInput(input)<<" city"<<endl;/*g.buyCity()*/}
-			   else{cout<<printInput(input)<<" settlement"<<endl;/*g.buySettlement()*/}
-			   break;
-		case L:if(typeOfSettlement == "city"){cout<<printInput(input)<<" city"<<endl;/*g.buyCity()*/}
-			   else{cout<<printInput(input)<<" settlement"<<endl;/*g.buySettlement()*/}
-			   break;
+			   if(typeOfSettlement == "city"){
+				   cout<<printInput(input)<<" city"<<endl;
+				   gameState->buildCity(Vertex{a, b, Corner::R});
+				   }
+			   else{
+				   cout<<printInput(input)<<" settlement"<<endl;
+				   gameState->buildSettlement(Vertex{a, b, Corner::R});
+				   }
+				break;
+		case L:
+			   if(typeOfSettlement == "city"){
+				   cout<<printInput(input)<<" city"<<endl;
+				   gameState->buildCity(Vertex{a, b, Corner::L});
+				   }
+			   else{
+				   cout<<printInput(input)<<" settlement"<<endl;
+				   gameState->buildSettlement(Vertex{a, b, Corner::L});
+				   }
+				break;
 		default:
 				cout << "Error: b s/c Command, Direction not Valid"<<endl;
 				break;
@@ -195,7 +218,7 @@ void CommandParser::parse(string input){
 	//splits the string input into a vector of strings
 	parsedString = splitString(input,' ');
 	//assigning integer values to first input case
-	enum Options {b = 1, p = 2, m = 3, r = 4, e = 5, t = 6};
+	enum Options {b = 1, p = 2, m = 3, r = 4, e = 5, t = 6, s = 7};
 
 	//switch statement to determine the first value in the command
 	switch(commandOptions(parsedString[0])){
@@ -217,7 +240,8 @@ void CommandParser::parse(string input){
 						int b = convertToInt(parsedString[3]);
 
 						if (isValidCoord(a) && isValidCoord(b)){
-							cout<<printInput(parsedString)<<endl;//call specified gamestate function
+							cout<<printInput(parsedString)<<endl;
+							gameState->moveRobber(Hexagon{a, b});
 						}
 						else{
 							cout <<"Error: m r coordinate values not valid"<<endl;
@@ -229,20 +253,33 @@ void CommandParser::parse(string input){
 				else{cout<<"Error: too many m commands"<<endl;}
 				break;
 		case r:
-				if(parsedString.size() == 1){cout<<printInput(parsedString)<<endl;/*g.rollDice()*/}
+				if(parsedString.size() == 1){
+					cout<<printInput(parsedString)<<endl;
+					gameState->rollDice();
+				}
 				else{cout<<"Error: too many r commands"<<endl;}
 				break;
 		case e:
-				if(parsedString.size() == 1){cout<<printInput(parsedString)<<endl;/*g.endTurn()*/}
+				if(parsedString.size() == 1){
+					cout<<printInput(parsedString)<<endl;
+					gameState->endTurn();
+					}
 				else{cout<<"Error: too many e commands"<<endl;}
 				break;
 		case t:
 				if(parsedString[1] == "p" && parsedString.size() == 2){/*g.tradeLater()*/}
 				else{cout<<"Error:t command not valid"<<endl;}
 				break;
+		case s:
+		{
+				int playerID = convertToInt(parsedString[1]);
+				gameState->stealResource(playerID);
+				break;
+		}
 		default:
 				cout <<"Error: invalid first command"<<endl;
 				break;
 	}
+	gameState->notifyObservers();
 }
 

@@ -5,7 +5,7 @@
 #include "gameState.h"
 
 class CommandParser{
-	//GameState g;
+	GameState *gameState;
 	std::vector <std::string> splitString(std::string,char);
 	int commandOptions(std::string commandWord);
 	void commandP(std::vector <std::string>);
@@ -19,7 +19,7 @@ class CommandParser{
 	std::string printInput(std::vector <std::string> input);
 	void commandLR(std::vector <std::string> input, std::string);
 public: 
-	CommandParser(/*GameState &*/);
+	CommandParser(GameState * gameState);
 	~CommandParser();
 	void parse(std::string);
 };
