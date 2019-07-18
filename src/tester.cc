@@ -6,6 +6,7 @@
 #include "gameState.h"
 #include "textDisplayObserver.h"
 #include "hexagonGridBuilder.h"
+#include "commandParser.h"
 
 void complain(const char* name){
     std::cout << "Test failed: " << name << std::endl;
@@ -164,12 +165,18 @@ void test_edge_gen(){
 void test_game_state(){
     HexagonGrid hexGrid = HexagonGridBuilder::defaultGrid();
     Board board{hexGrid};
-    std::vector<Player> players{Player{}};
-    GameState gameState{board, players};
+    std::vector<Player> players{Player{"1"}, Player{"2"}, Player{"3"}, Player{"4"}};
+    DiceRoll dice;
+    GameState gameState{board, players, dice};
     TextDisplay textDisplay{&gameState};
+    CommandParser commandParser{&gameState};
 
-    gameState.buildRoad(Edge{0,0, Side::N});
-    gameState.notifyObservers();
+    gameState.buildSettlement(Vertex{1,1,Corner::L});
+
+    std::string input;
+    while (std::getline(std::cin,input)){
+        commandParser.parse(input);
+    }
 }
 void test_all(){
     test_game_state();
