@@ -156,7 +156,7 @@ void TextDisplay::printCoordBoard(){
 	cout<<"( )     ( )     ( )     ( )     ( )     ( )             /*/"<<endl;
 	cout<<"| |-2,+2| |-1,+1| |+0,+0| |+1,-1| |+2,-2| |             |*| Place holder for roads"<<endl;
 	cout<<"( )     ( )     ( )     ( )     ( )     ( )             \\*\\"<<endl;
-	cout<<" \\ \\  / / \\ \\ / / \\ \\ / / \\ \\ / / \\ \\ / /"<<endl;
+	cout<<"  \\ \\ / / \\ \\ / / \\ \\ / / \\ \\ / / \\ \\ / /"<<endl;
 	cout<<"    ( )     ( )     ( )     ( )     ( )                 / /"<<endl;
 	cout<<"    | |-2,+1| |-1,+0| |+0,-1| |+1,-2| |                 | |  Empty roads"<<endl;
 	cout<<"    ( )     ( )     ( )     ( )     ( )                 \\ \\"<<endl;
@@ -220,7 +220,7 @@ void TextDisplay::printBoard(){
 
 	cout << ""<<vertices[27]<<"     "<<vertices[28]<<"     "<<vertices[29]<<"     "<<vertices[30]<<"     "<<vertices[31]<<"     "<<vertices[32]<<endl;
 
-	cout << " \\"<<roads[39]<<"\\  /"<<roads[40]<<"/ \\"<<roads[41]<<"\\ /"<<roads[42]<<"/ \\"<<roads[43]<<"\\ /"<<roads[44]<<"/ \\"<<roads[45]<<"\\ /"<<roads[46]<<"/ \\"<<roads[47]<<"\\ /"<<roads[48]<<"/"<<endl;
+	cout << "  \\"<<roads[39]<<"\\ /"<<roads[40]<<"/ \\"<<roads[41]<<"\\ /"<<roads[42]<<"/ \\"<<roads[43]<<"\\ /"<<roads[44]<<"/ \\"<<roads[45]<<"\\ /"<<roads[46]<<"/ \\"<<roads[47]<<"\\ /"<<roads[48]<<"/"<<endl;
 
 	cout << "    "<<vertices[33]<<"     "<<vertices[34]<<"     "<<vertices[35]<<"     "<<vertices[36]<<"     "<<vertices[37]<<endl;
 
