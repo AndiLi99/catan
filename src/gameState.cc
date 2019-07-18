@@ -21,12 +21,14 @@ void GameState::buildSettlement(Vertex vertex){
     if (getTurnPlayer().canBuildSettlement()){
         getTurnPlayer().subtractSettlement();
         board.addSettlement(vertex, turnPlayer);
+        getTurnPlayer().addVictoryPoints(1);
     }
 }
 void GameState::buildCity(Vertex vertex){
     if (getTurnPlayer().canBuildCity()){
         getTurnPlayer().subtractCity();
         board.upgradeSettlement(vertex);
+        getTurnPlayer().addVictoryPoints(1);
     }
 }
 void GameState::buildRoad(Edge edge){
@@ -90,10 +92,24 @@ int GameState::getLastDiceRoll(){
     return lastRoll;
 }
 
+int GameState::getTurnPlayerID(){
+    return turnPlayer;
+}
+
+bool GameState::canEndTurn(){
+    Player& player = getTurnPlayer();
+    return !(player.canBuildCity() ||
+            player.canBuildRoad() ||
+            player.canBuildSettlement())
+            && rolled;
+}
 void GameState::endTurn(){
-    ++turnPlayer;
-    if (turnPlayer > players.size()){
-        turnPlayer -= players.size();
+    if (canEndTurn()){
+        ++turnPlayer;
+        if (turnPlayer > players.size()){
+            turnPlayer -= players.size();
+        }
+        rolled = false;
     }
 }
 

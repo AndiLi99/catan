@@ -36,6 +36,7 @@ public:
 	void subtractCity();
 	std::vector<int> getUnbuilt();
 
+	void subResource(Resource resource);
 	void addResource(Resource resource);
 	void addResources(std::vector<int>);
 	void subtractResources(std::vector<int>);

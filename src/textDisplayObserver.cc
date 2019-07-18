@@ -93,16 +93,16 @@ TextDisplay::~TextDisplay(){
 	gameState->detach(this);
 }
 void TextDisplay::printLastDiceRoll(){
-	string username = gameState->getUsername();
 	int lastDiceRoll = gameState->getLastDiceRoll();
-	cout << username << " rolled a " << lastDiceRoll << endl;
+	cout << "Last dice roll was: " << lastDiceRoll << endl;
 }
 void TextDisplay::printResources(){
 	vector<int> resources = gameState->getResources();
 	string username = gameState->getUsername();
 	vector<int> unbuilt = gameState->getUnbuilt();
+	int playerID = gameState->getTurnPlayerID();
 
-	cout << username << " has:" <<endl;
+	cout << username << "(" << playerID << ") has:" <<endl;
 	cout << "===================" <<endl;
 	cout << resources[0] << " lumber"<<endl;
 	cout << resources[1] << " brick"<<endl;
@@ -118,7 +118,8 @@ void TextDisplay::printResources(){
 void TextDisplay::printVictoryPoints(){
 	string username = gameState->getUsername();
 	int victoryPoints = gameState->getVictoryPoints();
-	cout << username << " has " << victoryPoints <<" victory points." << endl;
+	int playerID = gameState->getTurnPlayerID();
+	cout << username << "(" << playerID << ") has " << victoryPoints <<" victory points." << endl;
 
 }
 void TextDisplay::printGame(){

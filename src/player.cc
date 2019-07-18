@@ -30,13 +30,20 @@ Resource Player::stealResource(){
 	srand(time(0));
 	int random = rand() % handSize();
 	int sum = 0;
+	Resource resource;
 	for (int res = 0; res < 5; ++res){
 		sum += resources[res];
-		if (random < sum) return static_cast<Resource>(res);
+		if (random < sum) {
+			resource = static_cast<Resource>(res);
+		} 
 	}
+	subResource(resource);
 }
 void Player::addResource(Resource resource){
 	++resources[resource];
+}
+void Player::subResource(Resource resource){
+	--resources[resource];
 }
 void Player::addResources(vector<int> add){
 	resources[0]+=add[0];

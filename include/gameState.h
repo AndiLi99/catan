@@ -21,6 +21,7 @@ class GameState: public Subject{
         int indexFromPlayerID(int);
         Player& getPlayer(int playerID);
         Player& getTurnPlayer();
+        bool canEndTurn();
     public:
         GameState(Board board, std::vector<Player> players, DiceRoll dice);
         ~GameState();
@@ -42,6 +43,7 @@ class GameState: public Subject{
         std::vector<int> getUnbuilt();
         int getVictoryPoints();
         int getLastDiceRoll();
+        int getTurnPlayerID();
         const Tile& cgetTile(Hexagon hex);
         const Road& cgetRoad(Edge edge);
         const Settlement& cgetSettlement(Vertex vertex);
