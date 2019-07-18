@@ -92,10 +92,41 @@ vector<char> TextDisplay::getRoads(){
 TextDisplay::~TextDisplay(){
 	gameState->detach(this);
 }
+void TextDisplay::printLastDiceRoll(){
+	string username = gameState->getUsername();
+	int lastDiceRoll = gameState->getLastDiceRoll();
+	cout << username << " rolled a " << lastDiceRoll << endl;
+}
+void TextDisplay::printResources(){
+	vector<int> resources = gameState->getResources();
+	string username = gameState->getUsername();
+	vector<int> unbuilt = gameState->getUnbuilt();
 
+	cout << username << " has:" <<endl;
+	cout << "===================" <<endl;
+	cout << resources[0] << " lumber"<<endl;
+	cout << resources[1] << " brick"<<endl;
+	cout << resources[2] << " grain"<<endl;
+	cout << resources[3] << " wool"<<endl;
+	cout << resources[4] << " ore"<<endl;
+	cout << unbuilt[0] << " unbuilt roads"<<endl;
+	cout << unbuilt[1] << " unbuilt settlements"<<endl;
+	cout << unbuilt[2] << " unbuilt cities"<<endl;
+	cout << "===================" <<endl;
+}
+
+void TextDisplay::printVictoryPoints(){
+	string username = gameState->getUsername();
+	int victoryPoints = gameState->getVictoryPoints();
+	cout << username << " has " << victoryPoints <<" victory points." << endl;
+
+}
 void TextDisplay::printGame(){
 	printCoordBoard();
 	printBoard();
+	printResources();
+	printVictoryPoints();
+	printLastDiceRoll();
 }
 void TextDisplay::notify(){
 	cout << "get notified" << endl;

@@ -11,13 +11,16 @@
 struct HexagonGrid;
 enum class GamePhase{Setup, Play, Finished};
 class GameState: public Subject{
-        DiceRoll dice;
         Board board;
         std::vector<Player> players;
+        DiceRoll dice;
         int turnPlayer;
         int lastRoll;
+        std::vector<int> stealablePlayers;
         bool rolled;
         int indexFromPlayerID(int);
+        Player& getPlayer(int playerID);
+        Player& getTurnPlayer();
     public:
         GameState(Board board, std::vector<Player> players, DiceRoll dice);
         ~GameState();
@@ -34,7 +37,11 @@ class GameState: public Subject{
         std::vector<Hexagon> getHexPrintOrder();
         std::vector<Edge> getEdgePrintOrder();
         std::vector<Vertex> getVertexPrintOrder();
-        ResourceArray getResources();
+        std::vector<int> getResources();
+        std::string getUsername();
+        std::vector<int> getUnbuilt();
+        int getVictoryPoints();
+        int getLastDiceRoll();
         const Tile& cgetTile(Hexagon hex);
         const Road& cgetRoad(Edge edge);
         const Settlement& cgetSettlement(Vertex vertex);

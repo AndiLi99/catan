@@ -17,3 +17,6 @@ int Settlement::getProductionRate(){
 bool Settlement::isCity() const{
     return productionRate == 2;
 }
+
+const std::vector<int> Settlement::upgradeCost{0,0,2,0,3};
+const std::vector<int> Settlement::cost{1,1,1,1,0};

@@ -38,3 +38,15 @@ bool Board::emptyEdge(Edge edge){
 bool Board::emptyVertex(Vertex vert){
     return hexGrid.emptyVertex(vert);
 }
+
+std::vector<int> Board::moveRobber(Hexagon hex){
+    robber = hex;
+    std::vector<Vertex> vertices = hex.corners();
+    std::vector<int> ret;
+    for (Vertex v: vertices){
+        if (!hexGrid.emptyVertex(v)){
+            ret.push_back(hexGrid.cgetSettlement(v).ownedBy());
+        }
+    }
+    return ret;
+}

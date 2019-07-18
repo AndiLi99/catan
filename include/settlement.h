@@ -1,6 +1,6 @@
 #ifndef SETTLEMENT_H
 #define SETTLEMENT_H
-
+#include <vector>
 class Settlement{
         int playerID;
         int productionRate;
@@ -10,5 +10,7 @@ class Settlement{
         void upgradeToCity();
         int getProductionRate();
         bool isCity() const;
+        static const std::vector<int> cost;
+        static const std::vector<int> upgradeCost;
 };
 #endif

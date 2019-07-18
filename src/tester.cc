@@ -165,13 +165,11 @@ void test_edge_gen(){
 void test_game_state(){
     HexagonGrid hexGrid = HexagonGridBuilder::defaultGrid();
     Board board{hexGrid};
-    std::vector<Player> players{Player{"1"}, Player{"2"}, Player{"3"}, Player{"4"}};
+    std::vector<Player> players{Player{"Andi"}, Player{"Gracie"}};
     DiceRoll dice;
     GameState gameState{board, players, dice};
     TextDisplay textDisplay{&gameState};
     CommandParser commandParser{&gameState};
-
-    gameState.buildSettlement(Vertex{1,1,Corner::L});
 
     std::string input;
     while (std::getline(std::cin,input)){

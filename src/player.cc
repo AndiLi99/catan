@@ -1,7 +1,15 @@
 #include "player.h"
+#include "road.h"
+#include "settlement.h"
+#include <random>
 using namespace std;
 
-Player::Player(string username):resources{vector{0,0,0,0,0}}, username{username}{}
+Player::Player(string username):resources{vector{0,0,0,0,0}}, username{username}{
+	purchasedCities = 0;
+	purchasedSettlements = 0;
+	purchasedRoads = 0;
+	victoryPoints = 0;
+}
 
 //destructor
 Player::~Player(){}
@@ -18,6 +26,18 @@ int Player::getVictoryPoints(){
 	return victoryPoints;
 }
 
+Resource Player::stealResource(){
+	srand(time(0));
+	int random = rand() % handSize();
+	int sum = 0;
+	for (int res = 0; res < 5; ++res){
+		sum += resources[res];
+		if (random < sum) return static_cast<Resource>(res);
+	}
+}
+void Player::addResource(Resource resource){
+	++resources[resource];
+}
 void Player::addResources(vector<int> add){
 	resources[0]+=add[0];
 	resources[1]+=add[1];
@@ -26,11 +46,11 @@ void Player::addResources(vector<int> add){
 	resources[4]+=add[4];
 }
 void Player::subtractResources(vector<int> add){
-	resources[0]+=add[0];
-	resources[1]+=add[1];
-	resources[2]+=add[2];
-	resources[3]+=add[3];
-	resources[4]+=add[4];
+	resources[0]-=add[0];
+	resources[1]-=add[1];
+	resources[2]-=add[2];
+	resources[3]-=add[3];
+	resources[4]-=add[4];
 }
 bool Player::hasAtLeast(vector<int> least){
 	return 
@@ -79,17 +99,25 @@ void Player::subtractSettlement(){
 void Player::subtractCity(){
 	--purchasedCities;
 }
-// void Player::showResources(){
-// 	cout << username << " has:" <<endl;
-// 	cout << "===================" <<endl;
-// 	cout << resources[0] << " wood"<<endl;
-// 	cout << resources[1] << " sheep"<<endl;
-// 	cout << resources[2] << " stone"<<endl;
-// 	cout << resources[3] << " brick"<<endl;
-// 	cout << resources[4] << " wheat"<<endl;
-// 	cout << "===================" <<endl;
-// }
 
-// void Player::showVictoryPoints(){
-// 	cout << username << " has " << victoryPoints <<" victory points." << endl;
-// }
+bool Player::canPurchaseRoad(){
+	return hasAtLeast(Road::cost);
+}
+bool Player::canPurchaseSettlement(){
+	return hasAtLeast(Settlement::cost);
+}
+bool Player::canPurchaseCity(){
+	return hasAtLeast(Settlement::upgradeCost);
+}
+bool Player::canBuildRoad(){
+	return purchasedRoads > 0;
+}
+bool Player::canBuildSettlement(){
+	return purchasedSettlements > 0;
+}
+bool Player::canBuildCity(){
+	return purchasedCities > 0;
+}
+std::vector<int> Player::getUnbuilt(){
+	return std::vector<int>{purchasedRoads, purchasedSettlements, purchasedCities};
+}
