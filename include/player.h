@@ -32,7 +32,7 @@ public:
 	void subtractVictoryPoint(int);
 
 	void showResources();
-	void buildRoad(Edge, bool);
+	void buildRoad(Edge);
 	void buildSettlement(Vertex);
 	void upgradeToCity(Vertex);
 	//void buyDevCard(developmentDeck&);
@@ -40,8 +40,8 @@ public:
 	//void showDevCard();
 	//void useDevCard(int i);
 
-	void addResource(int,int,int,int,int);
-	void subtractResource(int,int,int,int,int);
+	void addResource(int wood,int sheep,int stone,int brick ,int wheat);
+	void subtractResource(int wood,int sheep,int stone,int brick ,int wheat);
 	~Player();
 };
 #endif
