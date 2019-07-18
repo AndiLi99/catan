@@ -3,14 +3,33 @@
 #include <string>
 #include <vector>
 #include "menu.h"
-
+#include "menuController.h"
 using namespace std;
 
 //Constructor
-Menu::Menu(){}
+Menu::Menu(MenuController* controller): controller{controller}{}
 //Destructor
 Menu::~Menu(){}
-
+void Menu::saveGameHook(){
+	controller->saveGame();
+	
+}
+void Menu::loadGameHook(){
+	controller->loadGame();
+	
+}
+void Menu::randomNewHook(vector<string> usernames){
+	controller->randomNew(usernames);
+	
+}
+void Menu::defaultNewHook(vector<string> usernames){
+	controller->defaultNew(usernames);
+	
+}
+void Menu::customNewHook(vector<string> usernames){
+	controller->customNew(usernames);
+	
+}
 //takes in a string sentence to tokenizes into individual words
 vector <string> Menu::splitString(string str, char delim){
 	vector<string> cont;
@@ -60,13 +79,13 @@ void Menu::NOptions(vector <string> input){
 	enum Options{d = 1, r = 2, c = 3};
 	switch(NConvertToOption(input[1])){
 		case d:	cout<<"Success: n d"<<endl;
-				//call function();
+				defaultNewHook(vector<string>{input.begin() + 2, input.end()});
 				break;
 		case r:	cout<<"Success: n r"<<endl;
-				//call function();
+				randomNewHook(vector<string>{input.begin() + 2, input.end()});
 				break;
 		case c:	cout<<"Success: n c"<<endl;
-				//call function();
+				customNewHook(vector<string>{input.begin() + 2, input.end()});
 				break;
 		default:cout<<"Error: not a valid n command"<<endl;
 				break;
@@ -78,12 +97,13 @@ void Menu::printMenu(){
 	cout <<"==============================================================="<<endl;
 	cout <<"Welcome to Catan!"<<endl;
 	cout <<"Input one of the following options into the commandline"<<endl;
+	cout <<"Please specify 2 - 4 usernames." << endl;
 	cout <<"==============================================================="<<endl;
 	cout <<"Option 1: s (insert_file_name).txt - save game progress to file"<<endl;
 	cout <<"Option 2: l (insert_file_name).txt - load  saved game"<<endl;
-	cout <<"Option 3: n d - create new game, bowl"<<endl;
-	cout <<"Option 4: n r - create new game, random legal setup"<<endl;
-	cout <<"Option 5: n c - create new game, enter custom board editing"<<endl;
+	cout <<"Option 3: n d user1 user2 (user3) (user4)- create new default board"<<endl;
+	cout <<"Option 4: n r user1 user2 (user3) (user4)- create new random legal setup"<<endl;
+	cout <<"Option 5: n c user1 user2 (user3) (user4)- create new enter custom board editing"<<endl;
 	cout <<"==============================================================="<<endl;
 }
 
@@ -115,7 +135,7 @@ void Menu::parse(string input){
 				}
 				else{cout<<"Error: l command, too many argyments"<<endl;}
 				break;
-		case n:	if(parsedString.size() == 2){
+		case n:	if(parsedString.size() >= 4 && parsedString.size() <= 6){
 					//call second switch statement
 					NOptions(parsedString);
 				}
