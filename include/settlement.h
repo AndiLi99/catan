@@ -8,7 +8,7 @@ class Settlement{
         Settlement(int playerID);
         int ownedBy() const;
         void upgradeToCity();
-        int getProductionRate();
+        int getProductionRate() const;
         bool isCity() const;
         static const std::vector<int> cost;
         static const std::vector<int> upgradeCost;

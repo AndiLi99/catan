@@ -25,22 +25,22 @@ Hexagon Hexagon::hex_direction(int direction){
     return Hexagon::HEX_DIRECTION[positive_modulo(direction, 6)];
 }
 
-Hexagon Hexagon::neighbour(int direction){
+Hexagon Hexagon::neighbour(int direction) const{
     return *this + Hexagon::hex_direction(direction);
 }
 
-Edge Hexagon::border(Side s){
+Edge Hexagon::border(Side s)const{
     return Edge{a, b, s};
 }
 
-Vertex Hexagon::corner(Corner c){
+Vertex Hexagon::corner(Corner c)const{
     return Vertex{a, b, c};
 }
 
 /*
     @returns: This function returns a vector of Hexagon which are neighbours of this Hexagon    
  */
-std::vector<Hexagon> Hexagon::neighbours(){
+std::vector<Hexagon> Hexagon::neighbours() const{
     std::vector<Hexagon> ret;
     for (int i = 0; i < 6; ++i){
         ret.emplace_back(neighbour(i));
@@ -51,7 +51,7 @@ std::vector<Hexagon> Hexagon::neighbours(){
 /*
     @returns: This function returns a vector of Edges which border this Hexagon
  */
-std::vector<Edge> Hexagon::borders(){
+std::vector<Edge> Hexagon::borders() const{
     return std::vector<Edge>
     {
         border(Side::W),
@@ -66,7 +66,7 @@ std::vector<Edge> Hexagon::borders(){
 /*
     @returns: This function returns a vector of Vertex which are vertices of this hexagon
  */
-std::vector<Vertex> Hexagon::corners(){
+std::vector<Vertex> Hexagon::corners() const{
     return std::vector<Vertex>
     {
         corner(Corner::L),
@@ -78,27 +78,27 @@ std::vector<Vertex> Hexagon::corners(){
         };
 }
 
-Hexagon Hexagon::operator+(const Hexagon& other){
+Hexagon Hexagon::operator+(const Hexagon& other) const{
     return Hexagon{a+other.a, b+other.b};
 }
 
-Hexagon Hexagon::operator-(const Hexagon& other){
+Hexagon Hexagon::operator-(const Hexagon& other) const{
     return Hexagon{a-other.a, b-other.b};
 }
 
-Hexagon Hexagon::operator*(int factor){
+Hexagon Hexagon::operator*(int factor) const{
     return Hexagon{a*factor, b*factor};
 }
 
-bool Hexagon::operator==(const Hexagon& other){
+bool Hexagon::operator==(const Hexagon& other) const{
     return a == other.a && b == other.b;
 }
 
-bool Hexagon::operator!=(const Hexagon& other){
+bool Hexagon::operator!=(const Hexagon& other) const{
     return !(*this == other);
 }
 
-int Hexagon::length(){
+int Hexagon::length() const{
     return int((std::abs(a) + std::abs(b) + std::abs(c))/2);
 }
 

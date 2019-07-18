@@ -15,7 +15,7 @@ class Board {
 		void addSettlement(Vertex vertex, int playerID);
 		void upgradeSettlement(Vertex vertex);
 		void addRoad(Edge edge, int playerID);
-		std::vector<ResourceArray> produceResources(int rollNum);
+		std::vector<std::vector<int>> produceResources(int rollNum, int numPlayers);
 		std::vector<Edge> getRoads(int playerID);
 		std::vector<Vertex> getSettlements(int playerID);
 		std::vector<int> moveRobber(Hexagon location);

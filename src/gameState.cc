@@ -2,8 +2,9 @@
 #include <algorithm>
 
 GameState::GameState(Board board, std::vector<Player> players, DiceRoll dice): 
-board{board}, players{players}, dice{dice}{
+board{board}, players{players}, numPlayers{players.size()}, dice{dice}{
     turnPlayer = 1;
+    rolled = false;
 }
 GameState::~GameState(){}
 
@@ -84,8 +85,15 @@ std::string GameState::getUsername(){
 }
 
 void GameState::rollDice(){
-    lastRoll = dice.rollDice();
-    getTurnPlayer().addResources({std::vector<int>{1,1,1,1,1}});
+    if (!rolled){
+        lastRoll = dice.rollDice();
+        getTurnPlayer().addResources({std::vector<int>{1,1,1,1,1}});
+        std::vector<std::vector<int>> production = board.produceResources(lastRoll, numPlayers);
+        for (int i=0;i<numPlayers;++i){
+            players[i].addResources(production[i]);
+        }
+        rolled = true;
+    }
 }
 
 int GameState::getLastDiceRoll(){

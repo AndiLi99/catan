@@ -13,6 +13,7 @@ enum class GamePhase{Setup, Play, Finished};
 class GameState: public Subject{
         Board board;
         std::vector<Player> players;
+        int numPlayers;
         DiceRoll dice;
         int turnPlayer;
         int lastRoll;

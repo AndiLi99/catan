@@ -10,7 +10,7 @@ void Settlement::upgradeToCity(){
     productionRate = 2;
 }
 
-int Settlement::getProductionRate(){
+int Settlement::getProductionRate()const{
     return productionRate;
 }
 

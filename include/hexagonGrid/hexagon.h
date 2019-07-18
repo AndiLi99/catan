@@ -16,21 +16,21 @@ class Hexagon {
     int c;
     Hexagon(int a, int b);
     Hexagon(int a, int b, int c);
-    bool operator==(const Hexagon& other);
-    bool operator!=(const Hexagon& other);
-    Hexagon operator+(const Hexagon& other);
-    Hexagon operator-(const Hexagon& other);
-    Hexagon operator*(int factor);
+    bool operator==(const Hexagon& other) const;
+    bool operator!=(const Hexagon& other) const;
+    Hexagon operator+(const Hexagon& other) const;
+    Hexagon operator-(const Hexagon& other) const;
+    Hexagon operator*(int factor) const;
     friend std::ostream& operator<<(std::ostream& out, const Hexagon& hex);
     friend Hexagon operator*(const int factor, const Hexagon& other);
-    int length();
-    std::vector<Hexagon> neighbours();
-    std::vector<Edge> borders();
-    std::vector<Vertex> corners();
+    int length() const;
+    std::vector<Hexagon> neighbours() const;
+    std::vector<Edge> borders() const;
+    std::vector<Vertex> corners() const;
     static Hexagon hex_direction(int direction);
-    Hexagon neighbour(int direction);
-    Edge border(Side side);
-    Vertex corner(Corner corner);
+    Hexagon neighbour(int direction) const;
+    Edge border(Side side) const;
+    Vertex corner(Corner corner) const;
 };
 
 //https://stackoverflow.com/questions/16792751/hashmap-for-2d3d-coordinates-i-e-vector-of-doubles
