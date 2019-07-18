@@ -24,6 +24,9 @@ void GameState::startSetupPhase(){
 int GameState::indexFromPlayerID(int playerID){
     return playerID -1;
 }
+bool GameState::checkWin(){
+    return getTurnPlayer().getVictoryPoints() >= 10;
+}
 
 Player& GameState::getPlayer(int playerID){
     return players[indexFromPlayerID(playerID)];

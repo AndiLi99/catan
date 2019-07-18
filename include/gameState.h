@@ -32,6 +32,7 @@ class GameState: public Subject{
     public:
         GameState(Board board, std::vector<Player> players, DiceRoll dice);
         ~GameState();
+        bool checkWin();
         bool validSettlement(Vertex vertex);
         bool validRoad(Edge edge);
         void buildSettlement(Vertex vertex);

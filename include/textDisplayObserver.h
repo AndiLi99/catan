@@ -29,12 +29,12 @@ class TextDisplay: public Observer {
 	void printResources();
 	void printVictoryPoints();
 	void printWin();
-	void printGame();
 	void printBoard();
 	void printLastDiceRoll();
 public:
 	TextDisplay(GameState* gameState);
 	void notify() override;
+	void printGame();
 	~TextDisplay();
 };
 

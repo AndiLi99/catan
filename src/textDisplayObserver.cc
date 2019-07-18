@@ -136,6 +136,7 @@ void TextDisplay::printGame(){
 	printResources();
 	printVictoryPoints();
 	printLastDiceRoll();
+	printWin();
 }
 void TextDisplay::notify(){
 	printGame();
@@ -247,4 +248,11 @@ void TextDisplay::printBoard(){
 	cout<< "=========================================="<<endl;
 
 
+}
+void TextDisplay::printWin(){
+	if (gameState->checkWin()){
+		string username = gameState->getUsername();
+		int playerID = gameState->getTurnPlayerID();
+		cout << username << "(" << playerID << ") has won the game!" << endl;
+	}
 }
