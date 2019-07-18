@@ -31,6 +31,7 @@ class TextDisplay: public Observer {
 	void printWin();
 	void printGame();
 	void printBoard();
+	void printLastDiceRoll();
 public:
 	TextDisplay(GameState* gameState);
 	void notify() override;
