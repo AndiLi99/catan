@@ -13,7 +13,6 @@ class Player{
 	int victoryPoints;//to keep track of how many victory points there are
 	std::vector <int> resources;//count to keep track of wood, sheep, stone, brick, wheat
 	std::string username;
-	int id;
 	int purchasedRoads;
 	int purchasedSettlements;
 	int purchasedCities;
