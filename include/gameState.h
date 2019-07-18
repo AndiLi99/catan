@@ -4,17 +4,22 @@
 #include "subject.h"
 #include "player.h"
 #include "board.h"
+#include "diceRoll.h"
+#include "resource.h"
 #include <vector>
 
 struct HexagonGrid;
-enum class GamePhase{};
+enum class GamePhase{Setup, Play, Finished};
 class GameState: public Subject{
+        DiceRoll dice;
         Board board;
         std::vector<Player> players;
         int turnPlayer;
+        int lastRoll;
+        bool rolled;
         int indexFromPlayerID(int);
     public:
-        GameState(Board board, std::vector<Player> players);
+        GameState(Board board, std::vector<Player> players, DiceRoll dice);
         ~GameState();
         void buildSettlement(Vertex vertex);
         void buildCity(Vertex vertex);
@@ -22,12 +27,14 @@ class GameState: public Subject{
         void purchaseSettlement();
         void purchaseCity();
         void purchaseRoad();
-        ResourceArray getResources();
+        Resource stealResource(int playerID);
         void rollDice();
         void endTurn();
+        void moveRobber(Hexagon hex);
         std::vector<Hexagon> getHexPrintOrder();
         std::vector<Edge> getEdgePrintOrder();
         std::vector<Vertex> getVertexPrintOrder();
+        ResourceArray getResources();
         const Tile& cgetTile(Hexagon hex);
         const Road& cgetRoad(Edge edge);
         const Settlement& cgetSettlement(Vertex vertex);
