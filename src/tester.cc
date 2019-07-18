@@ -7,6 +7,7 @@
 #include "textDisplayObserver.h"
 #include "hexagonGridBuilder.h"
 #include "commandParser.h"
+#include "defaultGridBuilder.h"
 
 void complain(const char* name){
     std::cout << "Test failed: " << name << std::endl;
@@ -144,26 +145,30 @@ void printEdgeVect(std::vector<Edge> vect){
     }
 }
 void test_hexagon_gen(){
-    HexagonGrid hexagonGrid = HexagonGridBuilder::defaultGrid();
+    DefaultGridBuilder defBuilder;
+    HexagonGrid hexagonGrid = defBuilder.build();
     std::vector<Hexagon> vect = hexagonGrid.getHexPrintOrder();
     printHexVect(vect);
     std::cout << vect.size() << std::endl;
 }
 void test_vertex_gen(){
-    HexagonGrid hexagonGrid = HexagonGridBuilder::defaultGrid();
+    DefaultGridBuilder defBuilder;
+    HexagonGrid hexagonGrid = defBuilder.build();
     std::vector<Vertex> vect = hexagonGrid.getVertexPrintOrder();
     printVertVect(vect);
     std::cout << vect.size() << std::endl;
 }
 void test_edge_gen(){
-    HexagonGrid hexagonGrid = HexagonGridBuilder::defaultGrid();
+    DefaultGridBuilder defBuilder;
+    HexagonGrid hexagonGrid = defBuilder.build();
     std::vector<Edge> vect = hexagonGrid.getEdgePrintOrder();
     printEdgeVect(vect);
     std::cout << vect.size() << std::endl;
 }
 
 void test_game_state(){
-    HexagonGrid hexGrid = HexagonGridBuilder::defaultGrid();
+    DefaultGridBuilder defBuilder;
+    HexagonGrid hexGrid = defBuilder.build();
     Board board{hexGrid};
     std::vector<Player> players{Player{"Andi"}, Player{"Gracie"}};
     DiceRoll dice;

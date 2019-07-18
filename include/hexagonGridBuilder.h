@@ -3,9 +3,11 @@
 
 class HexagonGrid;
 
-struct HexagonGridBuilder{
-    static HexagonGrid defaultGrid();
-    static HexagonGrid randomGrid();
+class HexagonGridBuilder{
+    protected:
+        static HexagonGrid emptyDefault();
+    public:
+        virtual HexagonGrid build() = 0;
 };
 
 #endif
